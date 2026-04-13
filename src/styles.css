@@ -96,6 +96,18 @@ body {
 }
 
 /* ============================================
+   Logo on dark backgrounds
+   ============================================ */
+
+.logo-on-dark {
+  background: white;
+  border-radius: 8px;
+  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ============================================
    Material Symbols
    ============================================ */
 
