@@ -1,0 +1,284 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+/* ============================================
+   IRRIGASOLAR — Design System v2.0
+   Tokens & Custom Theme (Tailwind v4)
+   ============================================ */
+
+@theme {
+  /* --- Primary (Verde Irrigasolar) --- */
+  --color-primary: #01261F;
+  --color-primary-container: #1A3C34;
+  --color-on-primary: #FFFFFF;
+  --color-on-primary-container: #83A69C;
+  --color-primary-fixed: #C5EADF;
+  --color-primary-fixed-dim: #AACEC3;
+  --color-inverse-primary: #AACEC3;
+  --color-surface-tint: #43655C;
+
+  /* --- Secondary (Laranja Solar) --- */
+  --color-secondary: #954900;
+  --color-secondary-container: #FC820C;
+  --color-on-secondary: #FFFFFF;
+  --color-on-secondary-container: #5E2C00;
+  --color-secondary-fixed: #FFDCC6;
+  --color-secondary-fixed-dim: #FFB786;
+
+  /* --- Tertiary (Marrom Terra) --- */
+  --color-tertiary: #391800;
+  --color-tertiary-container: #592900;
+  --color-on-tertiary: #FFFFFF;
+  --color-on-tertiary-container: #F77E04;
+  --color-tertiary-fixed: #FFDCC6;
+  --color-tertiary-fixed-dim: #FFB786;
+
+  /* --- Surfaces --- */
+  --color-surface: #F8FAF9;
+  --color-surface-dim: #D8DAD9;
+  --color-surface-bright: #F8FAF9;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F2F4F3;
+  --color-surface-container: #ECEEED;
+  --color-surface-container-high: #E6E9E8;
+  --color-surface-container-highest: #E1E3E2;
+  --color-surface-variant: #E1E3E2;
+  --color-on-surface: #191C1C;
+  --color-on-surface-variant: #414846;
+  --color-inverse-surface: #2E3131;
+  --color-inverse-on-surface: #EFF1F0;
+
+  /* --- Outline --- */
+  --color-outline: #717976;
+  --color-outline-variant: #C1C8C4;
+
+  /* --- Error --- */
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #93000A;
+
+  /* --- Background --- */
+  --color-background: #F8FAF9;
+  --color-on-background: #191C1C;
+
+  /* --- Custom accents --- */
+  --color-accent-solar: #F77E04;
+  --color-whatsapp: #25D366;
+
+  /* --- Font families --- */
+  --font-headline: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-label: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* --- Border Radius (industrial, tight) --- */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Material Symbols
+   ============================================ */
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ============================================
+   Component: Solar Flare Gradient
+   ============================================ */
+
+.solar-flare {
+  background: linear-gradient(135deg, #954900 0%, #FC820C 100%);
+}
+
+.solar-flare-text {
+  background: linear-gradient(135deg, #954900 0%, #FC820C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Component: Section accent bar
+   ============================================ */
+
+.section-accent {
+  width: 48px;
+  height: 4px;
+  background-color: var(--color-accent-solar);
+}
+
+/* ============================================
+   Component: Risk/Benefit Card
+   ============================================ */
+
+.card-risk {
+  background: var(--color-surface-container-lowest);
+  padding: 1.5rem;
+  border-left: 4px solid var(--color-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.card-risk-danger {
+  border-left-color: var(--color-error);
+}
+
+/* ============================================
+   Component: Feature item (icon + text row)
+   ============================================ */
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.feature-icon {
+  color: var(--color-accent-solar);
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ============================================
+   Component: Badge
+   ============================================ */
+
+.badge-accent {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(247, 126, 4, 0.2);
+  border: 1px solid rgba(247, 126, 4, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-solar);
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.badge-primary {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--color-primary-fixed);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   Component: Counter metric
+   ============================================ */
+
+.counter-number {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.counter-label {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-on-surface-variant);
+}
+
+/* ============================================
+   Component: Spec table (monospace values)
+   ============================================ */
+
+.spec-value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--color-on-surface);
+}
+
+/* ============================================
+   Scroll-reveal animation
+   ============================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   WhatsApp floating button
+   ============================================ */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.25rem;
+  width: 56px;
+  height: 56px;
+  background: var(--color-whatsapp);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  z-index: 40;
+  transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+}
+
+@media (min-width: 768px) {
+  .whatsapp-float {
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
+
+/* ============================================
+   Responsive: desktop nav visibility
+   ============================================ */
+
+@media (min-width: 1024px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .desktop-only {
+    display: none !important;
+  }
+}

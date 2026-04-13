@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRRIGASOLAR | Bombeamento Solar e Projetos de Irrigação</title>
+  <meta name="description" content="Irrigasolar — Bombeamento solar, projetos de irrigação sob medida e IrrigaBox, o quadro casinha plug and play para inversores. Engenharia de irrigação para o campo brasileiro." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+
+  <!-- ============================================
+       HEADER
+       ============================================ -->
+  <header class="sticky top-0 z-50 bg-primary-container/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-5 py-3 lg:px-8">
+      <!-- Logo -->
+      <a href="#" class="flex items-center shrink-0">
+        <img src="/assets/img/logo-irrigasolar.svg" alt="Irrigasolar — Água e energia para o homem do campo" class="h-11 lg:h-14 w-auto" />
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-only flex items-center gap-8">
+        <a href="#bombeamento" class="font-label text-sm text-white/70 hover:text-white tracking-wide uppercase transition-colors">Bombeamento</a>
+        <a href="#irrigacao" class="font-label text-sm text-white/70 hover:text-white tracking-wide uppercase transition-colors">Irrigação</a>
+        <a href="/irrigabox.html" class="font-label text-sm text-white/70 hover:text-white tracking-wide uppercase transition-colors">IrrigaBox</a>
+        <a href="#resultados" class="font-label text-sm text-white/70 hover:text-white tracking-wide uppercase transition-colors">Resultados</a>
+        <a href="/loja.html" class="font-label text-sm text-white/70 hover:text-white tracking-wide uppercase transition-colors">Loja</a>
+        <a href="#contato" class="font-headline font-bold text-sm text-primary-container bg-white hover:bg-primary-fixed px-5 py-2.5 rounded-md tracking-wide uppercase transition-colors">Orçamento</a>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-toggle" class="mobile-only text-white/80 active:scale-95 transition-transform" aria-label="Abrir menu">
+        <span class="material-symbols-outlined text-[28px]">menu</span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <nav id="mobile-menu" class="mobile-only hidden bg-primary-container border-t border-white/10 px-5 pb-6 pt-2">
+      <a href="#bombeamento" class="block py-3 font-label text-sm text-white/80 hover:text-white tracking-wide uppercase border-b border-white/5">Bombeamento Solar</a>
+      <a href="#irrigacao" class="block py-3 font-label text-sm text-white/80 hover:text-white tracking-wide uppercase border-b border-white/5">Projeto de Irrigação</a>
+      <a href="/irrigabox.html" class="block py-3 font-label text-sm text-white/80 hover:text-white tracking-wide uppercase border-b border-white/5">IrrigaBox</a>
+      <a href="#resultados" class="block py-3 font-label text-sm text-white/80 hover:text-white tracking-wide uppercase border-b border-white/5">Resultados</a>
+      <a href="/loja.html" class="block py-3 font-label text-sm text-white/80 hover:text-white tracking-wide uppercase border-b border-white/5">Loja</a>
+      <a href="#contato" class="block mt-4 text-center font-headline font-bold text-sm text-primary-container bg-white hover:bg-primary-fixed px-5 py-3 rounded-md tracking-wide uppercase transition-colors">Solicitar Orçamento</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         SEÇÃO 1 — HERO (Irrigasolar — Engenharia)
+         ============================================ -->
+    <section id="hero" class="relative min-h-[90vh] flex flex-col justify-end px-5 pb-16 lg:pb-24 lg:px-8">
+      <!-- Background image -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKGkhYaAxGYR4xPdRckpWI510JqwzgnnSi4FN2ZYFzckWtUTrLdFTBjUYEajOjV6FjlIRTsftB8wjfTsuP6SELpoOJLNxSI6_35k99WZKXbsu5jdQ4x2pzZ1FX-x_1Vgml9ev6bqQ9DPer7BDLBsaKc8bxkVqFt7w30lrmEAl3vSw_Cv9SYwOVBb0wEBDOag_0YIg60kWSiFI9bASkzEgMuqdCodVGfYo_4t4jAgKFXufrCFhz4S5f55PLblfIFdTjQtOZO8DI3YQ"
+          alt="Painéis solares em propriedade agrícola com sistema de irrigação ao fundo"
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-primary/10"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 max-w-7xl mx-auto w-full">
+        <div class="max-w-2xl space-y-6">
+          <span class="badge-accent">Engenharia de Irrigação</span>
+
+          <h1 class="font-headline text-4xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+            Bombeamento Solar<br class="hidden lg:block" /> e Projetos de Irrigação<br class="hidden lg:block" /> para o Campo
+          </h1>
+
+          <p class="text-white/75 text-lg lg:text-xl max-w-lg">
+            Água com energia do sol. Projetos sob medida para a sua propriedade. Engenharia que entende o produtor brasileiro.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a href="#contato" class="solar-flare text-center font-headline font-bold text-[#311400] py-4 px-8 rounded-md shadow-lg active:scale-95 transition-transform uppercase tracking-wider text-sm">
+              Solicitar Orçamento
+            </a>
+            <a href="#bombeamento" class="text-center font-headline font-bold text-white border-2 border-white/30 hover:border-white hover:bg-white/10 py-4 px-8 rounded-md transition-all uppercase tracking-wider text-sm">
+              Nossos Serviços
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        <span class="material-symbols-outlined text-white/40 text-3xl">expand_more</span>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SEÇÃO 2 — BOMBEAMENTO SOLAR (Serviço Principal)
+         ============================================ -->
+    <section id="bombeamento" class="py-16 lg:py-24 bg-surface">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+          <!-- Imagem -->
+          <div>
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKGkhYaAxGYR4xPdRckpWI510JqwzgnnSi4FN2ZYFzckWtUTrLdFTBjUYEajOjV6FjlIRTsftB8wjfTsuP6SELpoOJLNxSI6_35k99WZKXbsu5jdQ4x2pzZ1FX-x_1Vgml9ev6bqQ9DPer7BDLBsaKc8bxkVqFt7w30lrmEAl3vSw_Cv9SYwOVBb0wEBDOag_0YIg60kWSiFI9bASkzEgMuqdCodVGfYo_4t4jAgKFXufrCFhz4S5f55PLblfIFdTjQtOZO8DI3YQ"
+              alt="Painéis solares em propriedade agrícola durante golden hour"
+              class="w-full h-72 lg:h-[28rem] object-cover rounded-lg shadow-md"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Texto -->
+          <div class="space-y-5">
+            <span class="badge-accent">Serviço Principal</span>
+            <h2 class="font-headline text-3xl lg:text-4xl font-bold text-primary tracking-tight">Bombeamento Solar</h2>
+            <p class="text-on-surface-variant text-lg">
+              Independência energética no campo. Sistemas fotovoltaicos robustos que eliminam o custo de energia na captação de água.
+            </p>
+
+            <div class="flex flex-wrap gap-3 pt-2">
+              <div class="flex items-center gap-2 bg-surface-container-high px-4 py-2.5 rounded-sm">
+                <span class="material-symbols-outlined text-accent-solar text-xl feature-icon">bolt</span>
+                <span class="font-label text-xs font-bold text-primary uppercase tracking-wide">0 custo de energia</span>
+              </div>
+              <div class="flex items-center gap-2 bg-surface-container-high px-4 py-2.5 rounded-sm">
+                <span class="material-symbols-outlined text-accent-solar text-xl feature-icon">wifi_off</span>
+                <span class="font-label text-xs font-bold text-primary uppercase tracking-wide">Funciona sem rede</span>
+              </div>
+              <div class="flex items-center gap-2 bg-surface-container-high px-4 py-2.5 rounded-sm">
+                <span class="material-symbols-outlined text-accent-solar text-xl feature-icon">water_drop</span>
+                <span class="font-label text-xs font-bold text-primary uppercase tracking-wide">Poços, represas e rios</span>
+              </div>
+            </div>
+
+            <p class="text-on-surface-variant text-sm">
+              Ideal para poços artesianos, represas, rios, córregos e cisternas. Sistemas dimensionados para a sua demanda hídrica.
+            </p>
+
+            <a href="#contato" class="inline-block solar-flare font-headline font-bold text-[#311400] py-3.5 px-8 rounded-md shadow-md active:scale-95 transition-transform uppercase tracking-wider text-sm mt-2">
+              Solicitar Orçamento
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SEÇÃO 3 — PROJETO DE IRRIGAÇÃO
+         ============================================ -->
+    <section id="irrigacao" class="py-16 lg:py-24 bg-surface-container-lowest">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+          <!-- Texto -->
+          <div class="space-y-5 order-2 lg:order-1">
+            <span class="badge-accent">Serviço Principal</span>
+            <h2 class="font-headline text-3xl lg:text-4xl font-bold text-primary tracking-tight">Projeto de Irrigação</h2>
+            <p class="text-on-surface-variant text-lg">
+              Da captação à entrega de água na planta. Projetos dimensionados para a realidade do produtor brasileiro.
+            </p>
+
+            <ul class="space-y-3 pt-2">
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-accent-solar text-xl feature-icon">check_circle</span>
+                <span class="text-on-surface text-sm font-medium">Dimensionamento hidráulico de alta precisão</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-accent-solar text-xl feature-icon">check_circle</span>
+                <span class="text-on-surface text-sm font-medium">Análise de solo e fonte de água</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-accent-solar text-xl feature-icon">check_circle</span>
+                <span class="text-on-surface text-sm font-medium">Seleção técnica de equipamentos</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-accent-solar text-xl feature-icon">check_circle</span>
+                <span class="text-on-surface text-sm font-medium">Acompanhamento de instalação e startup</span>
+              </li>
+            </ul>
+
+            <a href="#contato" class="inline-block bg-primary-container hover:bg-primary text-white font-headline font-bold py-3.5 px-8 rounded-md active:scale-95 transition-all uppercase tracking-wider text-sm mt-2">
+              Solicitar Projeto
+            </a>
+          </div>
+
+          <!-- Imagem -->
+          <div class="order-1 lg:order-2">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGJFzNWq8Frb7PXvTzlrpGjV3Y7JicGPqLBU4Ct8Kfuk9_op-QPo7mDtb4s2vHLoBGKXEAjwMOG0ytTQvLFrYBUFWwu5VtPqvBq4PkaGDFKCI9vJR6gtCC-6Au42hIr5Au8LnkejMPuA3f-L4RlRbKlR0uwT4HYfAcrAVt0N8AQFZzLaL4FJ3Zz_gRD604GBrAUNeJlSQhCdtxDDBWQm7Tuwvy9sOrUKkFAxiSB_6CtlOuVNTGIS9nY2pGLaSzUF9MpadqnYDn76k"
+              alt="Vista aérea de sistema de irrigação circular pivô central em campo verde"
+              class="w-full h-72 lg:h-[28rem] object-cover rounded-lg shadow-md"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SEÇÃO 4 — HERO BANNER IRRIGABOX (link para página dedicada)
+         ============================================ -->
+    <section id="irrigabox" class="relative min-h-[60vh] lg:min-h-[70vh] flex flex-col justify-end px-5 pb-16 lg:pb-24 lg:px-8">
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaXRVms0r-udAe_SJPVDAahmO53kmcEFwHtoSIJkCxVfLiPNPzJ5wZadsohsvzCf04ry4BLsM2ysOs8iubnGEYSXDrNhC5_yalfaWcaqjR3PrAmYop9SvXNuJNDoUiw8YqNoNq-VWaJ0Ahk2flvSKcgff2e7I4WtmL-PfUm_lAZ69gxh7kVl9v79iQXPUjeb-PqpR4QiwMqPBmtBZ6bscmsZ5-t2A9OX__ymd1Sw0OLDo4fA0n5xfsAFePGWHyB2FRdWUyj4kVFhs"
+          alt="IrrigaBox instalada em campo agrícola verde com painéis solares ao fundo"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto w-full">
+        <div class="max-w-2xl space-y-6">
+          <span class="badge-accent">Tecnologia de Proteção</span>
+
+          <h2 class="font-headline text-4xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+            Proteja seu Investimento<br class="hidden lg:block" /> com a Engenharia<br class="hidden lg:block" /> da IrrigaBox
+          </h2>
+
+          <p class="text-white/75 text-lg lg:text-xl max-w-lg">
+            Quadro casinha plug and play para inversores solares e convencionais. Pronto para ligar. Projetado para durar.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a href="/irrigabox.html" class="solar-flare text-center font-headline font-bold text-[#311400] py-4 px-8 rounded-md shadow-lg active:scale-95 transition-transform uppercase tracking-wider text-sm">
+              Quero minha IrrigaBox
+            </a>
+            <a href="/irrigabox.html" class="text-center font-headline font-bold text-white border-2 border-white/30 hover:border-white hover:bg-white/10 py-4 px-8 rounded-md transition-all uppercase tracking-wider text-sm">
+              Conhecer o Produto
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SEÇÃO 5 — SUA IRRIGAÇÃO (Prova Social)
+         ============================================ -->
+    <section id="resultados" class="py-16 lg:py-24 bg-surface-container-lowest">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <!-- Header -->
+        <div class="text-center mb-12 lg:mb-16 reveal">
+          <span class="badge-accent">Resultados</span>
+          <h2 class="font-headline text-3xl lg:text-5xl font-bold text-primary tracking-tight mt-4 mb-3">
+            Sua irrigação funcionando<br class="hidden lg:block" /> como deveria funcionar
+          </h2>
+          <div class="section-accent mx-auto"></div>
+        </div>
+
+        <!-- Métricas -->
+        <div class="grid grid-cols-3 gap-6 max-w-3xl mx-auto mb-16 reveal">
+          <div class="text-center">
+            <p class="counter-number" data-target="150">+150</p>
+            <p class="counter-label mt-1">projetos entregues</p>
+          </div>
+          <div class="text-center">
+            <p class="counter-number" data-target="50">+50</p>
+            <p class="counter-label mt-1">cidades atendidas</p>
+          </div>
+          <div class="text-center">
+            <p class="counter-number" data-target="12">12</p>
+            <p class="counter-label mt-1">anos de mercado</p>
+          </div>
+        </div>
+
+        <!-- Depoimento -->
+        <div class="max-w-3xl mx-auto text-center py-12 px-6 lg:px-12 bg-surface-container-low rounded-lg reveal">
+          <span class="material-symbols-outlined text-accent-solar text-5xl mb-6" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+          <blockquote class="font-headline text-xl lg:text-2xl italic text-primary leading-relaxed mb-8">
+            "A improvisação no campo é o maior inimigo da rentabilidade. A proteção adequada dos painéis de controle não é um gasto, é a garantia que o sistema funcionará quando a planta mais precisar."
+          </blockquote>
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-primary">person</span>
+            </div>
+            <p class="font-headline font-bold text-primary">Produtor Rural</p>
+            <p class="text-on-surface-variant text-sm uppercase tracking-widest font-label">Cliente Irrigasolar</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SEÇÃO 6 — LOJA (Banner para página dedicada)
+         ============================================ -->
+    <section id="loja" class="py-16 lg:py-20 bg-surface-container-low">
+      <div class="max-w-5xl mx-auto px-5 lg:px-8 text-center reveal">
+        <span class="material-symbols-outlined text-accent-solar text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">storefront</span>
+        <h2 class="font-headline text-3xl lg:text-4xl font-bold text-primary tracking-tight mb-3">
+          Loja Irrigasolar
+        </h2>
+        <p class="text-on-surface-variant text-lg max-w-xl mx-auto mb-8">
+          IrrigaBox, kits de bombeamento solar, componentes de irrigação e acessórios. Tudo em um só lugar.
+        </p>
+        <a href="/loja.html" class="inline-block bg-primary-container hover:bg-primary text-white font-headline font-bold py-4 px-10 rounded-md active:scale-95 transition-all uppercase tracking-wider text-sm">
+          Acessar a Loja
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================
+         BLOCO FINAL CTA
+         ============================================ -->
+    <section id="contato" class="solar-flare py-20 lg:py-28 text-center relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl mx-auto px-5">
+        <h2 class="font-headline text-3xl lg:text-4xl font-bold text-[#311400] mb-4">
+          Pronto para profissionalizar sua irrigação?
+        </h2>
+        <p class="text-[#311400]/75 text-lg mb-10 max-w-xl mx-auto">
+          Fale com nossos especialistas e receba um projeto personalizado para sua propriedade.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#" class="bg-primary-container text-white font-headline font-bold py-4 px-10 rounded-md shadow-2xl active:scale-95 transition-transform uppercase tracking-widest text-sm">
+            Solicitar Orçamento
+          </a>
+          <a href="https://wa.me/5575999590288" target="_blank" rel="noopener" class="bg-[#25D366] text-white font-headline font-bold py-4 px-10 rounded-md shadow-lg active:scale-95 transition-transform uppercase tracking-widest text-sm flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="bg-[#2A1A0E]">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
+        <!-- Col 1: Logo + Slogan -->
+        <div>
+          <div class="mb-4">
+            <img src="/assets/img/logo-irrigasolar.svg" alt="Irrigasolar" class="h-14 w-auto" />
+          </div>
+          <p class="font-headline text-sm font-medium text-[#EDB230] italic mb-3">Água e energia para o homem do campo.</p>
+          <p class="text-white/50 text-sm max-w-xs">Engenharia de irrigação e proteção inteligente para o agronegócio brasileiro.</p>
+        </div>
+
+        <!-- Col 2: Links -->
+        <div>
+          <h4 class="font-label text-xs font-bold text-white/40 uppercase tracking-widest mb-4">Navegação</h4>
+          <nav class="space-y-3">
+            <a href="#hero" class="block text-white/60 hover:text-white text-sm transition-colors">Home</a>
+            <a href="#bombeamento" class="block text-white/60 hover:text-white text-sm transition-colors">Bombeamento Solar</a>
+            <a href="#irrigacao" class="block text-white/60 hover:text-white text-sm transition-colors">Projeto de Irrigação</a>
+            <a href="#irrigabox" class="block text-white/60 hover:text-white text-sm transition-colors">IrrigaBox</a>
+          </nav>
+        </div>
+
+        <!-- Col 3: Produtos -->
+        <div>
+          <h4 class="font-label text-xs font-bold text-white/40 uppercase tracking-widest mb-4">Produtos</h4>
+          <nav class="space-y-3">
+            <a href="#loja" class="block text-white/60 hover:text-white text-sm transition-colors">IrrigaBox Standard</a>
+            <a href="#loja" class="block text-white/60 hover:text-white text-sm transition-colors">IrrigaBox Pro</a>
+            <a href="#loja" class="block text-white/60 hover:text-white text-sm transition-colors">Kit Bombeamento</a>
+            <a href="#loja" class="block text-white/60 hover:text-white text-sm transition-colors">Acessórios</a>
+          </nav>
+        </div>
+
+        <!-- Col 4: Contato -->
+        <div>
+          <h4 class="font-label text-xs font-bold text-white/40 uppercase tracking-widest mb-4">Contato</h4>
+          <div class="space-y-3">
+            <a href="https://wa.me/5575999590288" target="_blank" rel="noopener" class="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp
+            </a>
+            <a href="mailto:contato@irrigasolar.com.br" class="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors">
+              <span class="material-symbols-outlined text-base">mail</span>
+              contato@irrigasolar.com.br
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="border-t border-white/8 mt-10 pt-8">
+        <p class="text-white/25 text-xs tracking-widest uppercase text-center">
+          &copy; 2025 Irrigasolar Engenharia. Todos os direitos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       BOTTOM NAV (Mobile)
+       ============================================ -->
+  <nav class="mobile-only fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-surface/90 backdrop-blur-lg border-t border-primary/10 shadow-[0_-10px_30px_rgba(25,28,28,0.06)] z-50 rounded-t-xl">
+    <a href="#bombeamento" class="flex flex-col items-center justify-center text-accent-solar">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">solar_power</span>
+      <span class="font-label text-[10px] uppercase tracking-wider font-medium">Bombeamento</span>
+    </a>
+    <a href="#irrigabox" class="flex flex-col items-center justify-center text-primary/60 hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">settings_input_component</span>
+      <span class="font-label text-[10px] uppercase tracking-wider font-medium">IrrigaBox</span>
+    </a>
+    <a href="#contato" class="flex flex-col items-center justify-center text-primary/60 hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">request_quote</span>
+      <span class="font-label text-[10px] uppercase tracking-wider font-medium">Orçamento</span>
+    </a>
+  </nav>
+
+  <!-- Spacer for bottom nav on mobile -->
+  <div class="h-16 lg:hidden"></div>
+
+  <!-- ============================================
+       WHATSAPP FLOATING
+       ============================================ -->
+  <a href="https://wa.me/5575999590288" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuToggle.querySelector('.material-symbols-outlined');
+      icon.textContent = mobileMenu.classList.contains('hidden') ? 'menu' : 'close';
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuToggle.querySelector('.material-symbols-outlined').textContent = 'menu';
+      });
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>

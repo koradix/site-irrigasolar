@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 150" fill="none">
+  <!-- Oval branco (para fundo escuro) -->
+  <ellipse cx="88" cy="65" rx="80" ry="55" transform="rotate(-8 88 65)" fill="white" opacity="0.15"/>
+
+  <!-- Folha / broto -->
+  <g transform="translate(30, 28)">
+    <path d="M22 60 C22 55, 15 42, 15 30 C15 18, 22 8, 38 2 C38 2, 34 14, 32 24 C30 34, 28 48, 22 60Z" fill="white" opacity="0.5"/>
+    <path d="M22 60 C22 55, 26 44, 32 34 C36 26, 40 20, 38 2" stroke="white" stroke-width="2" fill="none" opacity="0.3"/>
+    <path d="M26 50 C30 42, 36 36, 48 30 C48 30, 42 40, 36 48 C32 52, 28 54, 26 50Z" fill="white" opacity="0.35"/>
+  </g>
+
+  <!-- Texto "irriga" em branco -->
+  <text x="48" y="74" font-family="'Nunito', 'Arial Rounded MT Bold', 'Varela Round', sans-serif" font-size="54" font-weight="800" fill="white" letter-spacing="-1.5">irriga</text>
+
+  <!-- Texto "solar" em branco mais claro -->
+  <text x="92" y="128" font-family="'Nunito', 'Arial Rounded MT Bold', 'Varela Round', sans-serif" font-size="54" font-weight="800" fill="white" opacity="0.8" letter-spacing="-1.5">solar</text>
+</svg>
