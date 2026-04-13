@@ -96,15 +96,11 @@ body {
 }
 
 /* ============================================
-   Logo on dark backgrounds
+   Logo: blend into any background
    ============================================ */
 
-.logo-on-dark {
-  background: white;
-  border-radius: 8px;
-  padding: 4px 12px;
-  display: inline-flex;
-  align-items: center;
+.logo-blend {
+  mix-blend-mode: multiply;
 }
 
 /* ============================================
