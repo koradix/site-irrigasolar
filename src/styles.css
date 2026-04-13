@@ -99,9 +99,7 @@ body {
    Logo: blend into any background
    ============================================ */
 
-.logo-blend {
-  mix-blend-mode: multiply;
-}
+/* Logo PNG transparent — no blend needed */
 
 /* ============================================
    Material Symbols
