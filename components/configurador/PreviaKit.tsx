@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { calcularKit, type KitCalculation } from '@/lib/calcula-kit';
+import { calcularKitVisual } from '@/lib/calcula-kit';
 import type { ConfiguradorData } from '@/lib/configurador-schema';
 
 interface Props {
@@ -50,14 +50,14 @@ function Placeholder() {
 }
 
 function KitCard({ data }: { data: ConfiguradorData }) {
-  const kit = calcularKit(data);
+  const kit = calcularKitVisual(data);
 
   return (
     <div>
       {/* Header */}
       <header className="px-6 md:px-7 pt-6 pb-5 border-b border-rule space-y-2">
         <span className="font-label uppercase tracking-[0.2em] text-[11px] font-bold text-ocher-dark">
-          {kit.aplicacaoLabel}
+          {kit.aplicacao}
         </span>
         <h3 className="font-headline text-3xl md:text-4xl font-semibold text-ink-deep leading-tight">
           Seu Kit Irrigasolar
@@ -70,8 +70,8 @@ function KitCard({ data }: { data: ConfiguradorData }) {
       {/* Imagem inversor */}
       <div className="relative aspect-[4/3] bg-cream border-b border-rule">
         <Image
-          src={inversorImage(kit.inversorModelo)}
-          alt={`Inversor ${kit.inversorModelo}`}
+          src={inversorImage(kit.inversor.modelo)}
+          alt={`Inversor ${kit.inversor.modelo}`}
           fill
           sizes="(min-width: 1024px) 35vw, 100vw"
           className="object-contain p-8"
@@ -80,14 +80,13 @@ function KitCard({ data }: { data: ConfiguradorData }) {
 
       {/* Ficha técnica */}
       <dl className="px-6 md:px-7 py-5 grid grid-cols-2 gap-x-6 gap-y-3 border-b border-rule">
-        <Spec k="Aplicação" v={kit.aplicacaoLabel} />
-        <Spec k="Potência" v={<AnimatedText value={kit.potenciaTexto} />} />
+        <Spec k="Aplicação" v={kit.aplicacao} />
         <Spec
-          k="Módulos solares"
+          k="Potência"
           v={
-            kit.modulosQtd ? (
+            kit.kwp ? (
               <>
-                <CountUp value={kit.modulosQtd} /> × {kit.wattagemModulo} Wp
+                <CountUp value={kit.kwp} decimals={1} /> kWp
               </>
             ) : (
               'a dimensionar'
@@ -95,36 +94,35 @@ function KitCard({ data }: { data: ConfiguradorData }) {
           }
         />
         <Spec
-          k="Inversor WEG"
+          k="Módulos solares"
           v={
-            <>
-              {kit.inversorQtd > 0 && (
-                <>
-                  <CountUp value={kit.inversorQtd} />×{' '}
-                </>
-              )}
-              {kit.inversorModelo}
-            </>
+            kit.modulos.qtd ? (
+              <>
+                <CountUp value={kit.modulos.qtd} /> × {kit.modulos.wp_unitario} Wp
+              </>
+            ) : (
+              'a dimensionar'
+            )
           }
         />
+        <Spec k="Inversor WEG" v={<AnimatedText value={kit.inversor.modelo} />} />
         <Spec k="Estrutura" v={kit.estrutura} />
-        {kit.vazaoEstimadaM3h !== undefined && (
+        {kit.vazao_estimada > 0 && (
           <Spec
             k="Vazão estimada"
             v={
               <>
-                <CountUp value={kit.vazaoEstimadaM3h} decimals={kit.vazaoEstimadaM3h % 1 ? 1 : 0} />{' '}
-                m³/h
+                <CountUp value={kit.vazao_estimada} /> m³/h
               </>
             }
           />
         )}
-        {kit.areaIrrigavelHa !== undefined && (
+        {kit.area_irrigavel > 0 && (
           <Spec
             k="Área irrigável"
             v={
               <>
-                <CountUp value={kit.areaIrrigavelHa} decimals={1} /> ha
+                <CountUp value={kit.area_irrigavel} decimals={1} /> ha
               </>
             }
           />

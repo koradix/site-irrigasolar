@@ -1,0 +1,101 @@
+[
+  {
+    "cv": 4,
+    "kwp_min": 5.5,
+    "kwp_max": 7.0,
+    "modulos_qtd": 12,
+    "modulos_wp": 550,
+    "inversor_modelo": "CFW500-4CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 14,
+    "preco_tabela_weg": 18500
+  },
+  {
+    "cv": 7.5,
+    "kwp_min": 10,
+    "kwp_max": 13,
+    "modulos_qtd": 22,
+    "modulos_wp": 550,
+    "inversor_modelo": "CFW500-7CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 26,
+    "preco_tabela_weg": 28500
+  },
+  {
+    "cv": 12.5,
+    "kwp_min": 15,
+    "kwp_max": 19,
+    "modulos_qtd": 32,
+    "modulos_wp": 550,
+    "inversor_modelo": "CFW500-12CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 42,
+    "preco_tabela_weg": 42000
+  },
+  {
+    "cv": 20,
+    "kwp_min": 22,
+    "kwp_max": 28,
+    "modulos_qtd": 50,
+    "modulos_wp": 550,
+    "inversor_modelo": "CFW900-20CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 65,
+    "preco_tabela_weg": 62000
+  },
+  {
+    "cv": 30,
+    "kwp_min": 32,
+    "kwp_max": 40,
+    "modulos_qtd": 70,
+    "modulos_wp": 550,
+    "inversor_modelo": "CFW900-30CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 92,
+    "preco_tabela_weg": 84000
+  },
+  {
+    "cv": 50,
+    "kwp_min": 55,
+    "kwp_max": 68,
+    "modulos_qtd": 120,
+    "modulos_wp": 550,
+    "inversor_modelo": "CFW900-50CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 140,
+    "preco_tabela_weg": 145000
+  },
+  {
+    "cv": 75,
+    "kwp_min": 78,
+    "kwp_max": 95,
+    "modulos_qtd": 170,
+    "modulos_wp": 550,
+    "inversor_modelo": "SIW600-75CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 200,
+    "preco_tabela_weg": 210000
+  },
+  {
+    "cv": 100,
+    "kwp_min": 105,
+    "kwp_max": 130,
+    "modulos_qtd": 230,
+    "modulos_wp": 550,
+    "inversor_modelo": "SIW600-100CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 260,
+    "preco_tabela_weg": 290000
+  },
+  {
+    "cv": 125,
+    "kwp_min": 130,
+    "kwp_max": 160,
+    "modulos_qtd": 280,
+    "modulos_wp": 550,
+    "inversor_modelo": "SIW700-125CV",
+    "estrutura_default": "solo",
+    "vazao_m3h_estimada": 320,
+    "preco_tabela_weg": 365000
+  }
+]
