@@ -85,6 +85,31 @@ export const step3Schema = z.object({
 });
 export type Step3Values = z.infer<typeof step3Schema>;
 
+/**
+ * Schema completo para validar o payload que vem do front no POST /api/configurador.
+ * Permissivo nos campos ramificados — a validação fina por aplicação é responsabilidade do front.
+ */
+export const apiPayloadSchema = z.object({
+  nome: z.string().min(2),
+  sobrenome: z.string().min(2),
+  whatsapp: z.string().min(10),
+  cep: z.string().optional().nullable(),
+  cidade: z.string().optional().nullable(),
+  uf: z.string().optional().nullable(),
+
+  aplicacao: z.enum(['pivo', 'poco', 'fazenda', 'multiplo']),
+
+  pocoPotencia: z.number().optional(),
+  pocoProfundidade: z.number().optional(),
+  pivoQuantidade: z.enum(['1', '2-3', '4+']).optional(),
+  pivoPotencia: z.number().optional(),
+  fazendaContaMensal: z.number().optional(),
+  multiploDescricao: z.string().optional(),
+
+  urgencia: z.enum(['este-mes', '3-meses', 'pesquisando']).optional(),
+});
+export type ApiPayload = z.infer<typeof apiPayloadSchema>;
+
 /** Helpers */
 export function maskWhatsapp(v: string): string {
   const d = v.replace(/\D/g, '').slice(0, 11);
