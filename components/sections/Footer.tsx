@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
-
-const WHATSAPP_LINK = 'https://wa.me/5500000000000';
+import { WHATSAPP_LINK } from '@/lib/contato';
 
 const navLinks = [
   { label: 'Bombeamento', href: '#bombeamento' },

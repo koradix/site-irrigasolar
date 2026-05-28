@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Container } from '@/components/ui/Container';
+import { WHATSAPP_LINK } from '@/lib/contato';
 import type { KitVisual } from '@/lib/calcula-kit';
 
 interface ObrigadoContext {
@@ -12,18 +13,6 @@ interface ObrigadoContext {
   nome?: string;
   whatsapp?: string;
   kit?: KitVisual;
-}
-
-const WHATSAPP_FALLBACK = '5500000000000';
-
-function digitsOnly(s: string): string {
-  return s.replace(/\D/g, '');
-}
-
-function buildWhatsappLink(numero?: string): string {
-  const raw = numero ? digitsOnly(numero) : '';
-  const phone = raw ? (raw.startsWith('55') ? raw : `55${raw}`) : WHATSAPP_FALLBACK;
-  return `https://wa.me/${phone}`;
 }
 
 export function ObrigadoView() {
@@ -141,7 +130,7 @@ export function ObrigadoView() {
             className="space-y-3"
           >
             <a
-              href={buildWhatsappLink(ctx.whatsapp)}
+              href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1da851] text-ink-deep font-body font-bold tracking-wide px-8 py-4 rounded-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ocher focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
