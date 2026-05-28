@@ -22,7 +22,9 @@ const config: Config = {
         rule: 'var(--rule)',
       },
       fontFamily: {
-        headline: ['var(--font-cormorant)', 'Georgia', 'serif'],
+        // Clean sans-serif para títulos e corpo (estética do site Irrigasolar).
+        // Cormorant fica disponível via var(--font-cormorant) para casos pontuais.
+        headline: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
         body: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
         label: ['"Courier New"', 'Courier', 'monospace'],
       },
