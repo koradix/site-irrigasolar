@@ -3,6 +3,8 @@ import { ZodError } from 'zod';
 import { apiPayloadSchema } from '@/lib/configurador-schema';
 import { calcularKitCompleto } from '@/lib/calcula-kit';
 import { getSupabase } from '@/lib/supabase';
+import { sendWhatsApp } from '@/lib/whatsapp';
+import { montarMensagemMae } from '@/lib/mensagens';
 import type { ConfiguradorResponse, DimensaoDados } from '@/types/lead';
 
 export const runtime = 'nodejs';
@@ -82,7 +84,8 @@ export async function POST(request: Request): Promise<NextResponse<ConfiguradorR
     );
   }
 
-  // Webhook n8n — best effort, não bloqueia resposta ao cliente
+  // Webhook n8n — dispara o restante da régua (M2+ com timing humanizado controlado lá)
+  // Best effort: não bloqueia resposta ao cliente
   const webhookUrl = process.env.N8N_WEBHOOK_URL;
   if (webhookUrl) {
     fireAndForget(
@@ -95,7 +98,55 @@ export async function POST(request: Request): Promise<NextResponse<ConfiguradorR
     );
   }
 
+  // Mensagem-mãe (M1) via Z-API — envio imediato.
+  // TODO: mover para n8n se a régua humanizada exigir delay antes da M1.
+  if (process.env.ZAPI_INSTANCE && process.env.ZAPI_TOKEN) {
+    fireAndForget(
+      enviarMensagemMae({
+        leadId,
+        nome: payload.nome,
+        cidade: payload.cidade ?? null,
+        whatsapp: payload.whatsapp,
+        kit,
+      }),
+      '[configurador] envio M1',
+    );
+  }
+
   return NextResponse.json({ success: true, leadId });
+}
+
+async function enviarMensagemMae(args: {
+  leadId: string;
+  nome: string;
+  cidade: string | null;
+  whatsapp: string;
+  kit: ReturnType<typeof calcularKitCompleto>;
+}): Promise<void> {
+  const mensagem = montarMensagemMae({
+    nome: args.nome,
+    cidade: args.cidade,
+    kit: args.kit,
+  });
+  const result = await sendWhatsApp(args.whatsapp, mensagem);
+
+  if (!result.success) {
+    console.error('[configurador] M1 Z-API falhou:', result.error);
+    return;
+  }
+
+  try {
+    const supabase = getSupabase();
+    await supabase
+      .from('leads')
+      .update({
+        enviado_whatsapp: true,
+        enviado_whatsapp_at: new Date().toISOString(),
+      })
+      .eq('id', args.leadId);
+  } catch (err) {
+    console.error('[configurador] M1 enviada mas update do lead falhou', err);
+  }
 }
 
 function fireAndForget(promise: Promise<unknown>, label: string): void {
