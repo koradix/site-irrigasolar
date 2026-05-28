@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { Kicker } from '@/components/brand/Kicker';
 import { StepNumbers } from './StepNumbers';
-import { KitPreview } from './KitPreview';
+import { PreviaKit } from './PreviaKit';
 import { Step0Contato } from './steps/Step0Contato';
 import { Step1Aplicacao } from './steps/Step1Aplicacao';
 import { Step2Dimensao } from './steps/Step2Dimensao';
@@ -79,7 +79,7 @@ export function Configurador() {
 
           {/* RIGHT: preview */}
           <div>
-            <KitPreview data={data} step={step} />
+            <PreviaKit data={data} step={step} />
           </div>
         </div>
       </Container>

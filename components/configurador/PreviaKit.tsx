@@ -1,0 +1,234 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { calcularKit, type KitCalculation } from '@/lib/calcula-kit';
+import type { ConfiguradorData } from '@/lib/configurador-schema';
+
+interface Props {
+  data: ConfiguradorData;
+  step: number;
+}
+
+export function PreviaKit({ data, step }: Props) {
+  const showPlaceholder = step < 1;
+
+  return (
+    <aside className="lg:sticky lg:top-24">
+      <div className="relative bg-white border border-rule rounded-sm shadow-[0_4px_24px_rgba(15,26,18,0.08)] overflow-hidden">
+        {showPlaceholder ? <Placeholder /> : <KitCard data={data} />}
+      </div>
+    </aside>
+  );
+}
+
+function Placeholder() {
+  return (
+    <div className="p-8 md:p-10 flex flex-col items-center text-center gap-5 min-h-[420px] justify-center">
+      <motion.div
+        animate={{ y: [0, -8, 0], rotate: [0, 2, -2, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        className="relative w-32 h-32 md:w-40 md:h-40"
+      >
+        <Image
+          src="/mascote.png"
+          alt="Mascote Irrigasolar"
+          fill
+          sizes="160px"
+          className="object-contain"
+        />
+      </motion.div>
+      <p className="font-label uppercase tracking-[0.18em] text-xs text-ocher-dark font-bold">
+        // Aguarde
+      </p>
+      <h4 className="font-headline text-2xl md:text-3xl font-semibold text-ink-deep leading-tight max-w-xs">
+        Vamos montar seu kit em 90 segundos
+      </h4>
+    </div>
+  );
+}
+
+function KitCard({ data }: { data: ConfiguradorData }) {
+  const kit = calcularKit(data);
+
+  return (
+    <div>
+      {/* Header */}
+      <header className="px-6 md:px-7 pt-6 pb-5 border-b border-rule space-y-2">
+        <span className="font-label uppercase tracking-[0.2em] text-[11px] font-bold text-ocher-dark">
+          {kit.aplicacaoLabel}
+        </span>
+        <h3 className="font-headline text-3xl md:text-4xl font-semibold text-ink-deep leading-tight">
+          Seu Kit Irrigasolar
+        </h3>
+        <p className="italic text-ink-soft text-sm">
+          Engenharia WEG · IrrigaBox<sup>®</sup> inclusa
+        </p>
+      </header>
+
+      {/* Imagem inversor */}
+      <div className="relative aspect-[4/3] bg-cream border-b border-rule">
+        <Image
+          src={inversorImage(kit.inversorModelo)}
+          alt={`Inversor ${kit.inversorModelo}`}
+          fill
+          sizes="(min-width: 1024px) 35vw, 100vw"
+          className="object-contain p-8"
+        />
+      </div>
+
+      {/* Ficha técnica */}
+      <dl className="px-6 md:px-7 py-5 grid grid-cols-2 gap-x-6 gap-y-3 border-b border-rule">
+        <Spec k="Aplicação" v={kit.aplicacaoLabel} />
+        <Spec k="Potência" v={<AnimatedText value={kit.potenciaTexto} />} />
+        <Spec
+          k="Módulos solares"
+          v={
+            kit.modulosQtd ? (
+              <>
+                <CountUp value={kit.modulosQtd} /> × {kit.wattagemModulo} Wp
+              </>
+            ) : (
+              'a dimensionar'
+            )
+          }
+        />
+        <Spec
+          k="Inversor WEG"
+          v={
+            <>
+              {kit.inversorQtd > 0 && (
+                <>
+                  <CountUp value={kit.inversorQtd} />×{' '}
+                </>
+              )}
+              {kit.inversorModelo}
+            </>
+          }
+        />
+        <Spec k="Estrutura" v={kit.estrutura} />
+        {kit.vazaoEstimadaM3h !== undefined && (
+          <Spec
+            k="Vazão estimada"
+            v={
+              <>
+                <CountUp value={kit.vazaoEstimadaM3h} decimals={kit.vazaoEstimadaM3h % 1 ? 1 : 0} />{' '}
+                m³/h
+              </>
+            }
+          />
+        )}
+        {kit.areaIrrigavelHa !== undefined && (
+          <Spec
+            k="Área irrigável"
+            v={
+              <>
+                <CountUp value={kit.areaIrrigavelHa} decimals={1} /> ha
+              </>
+            }
+          />
+        )}
+      </dl>
+
+      {/* IrrigaBox box — destaque */}
+      <div className="bg-ocher-dark/10 border-l-4 border-ocher px-5 py-4 mx-5 my-5 rounded-sm">
+        <p className="font-bold text-ink-deep text-[14px] flex items-center gap-2">
+          <span className="text-ocher-dark text-base" aria-hidden>
+            ✓
+          </span>
+          IrrigaBox<sup>®</sup> inclusa em todo kit
+        </p>
+        <p className="text-ink-soft text-[12px] mt-1.5 leading-relaxed">
+          Controle de temperatura · umidade · segurança operacional · garantia de serviço estendida
+          para 18 meses
+        </p>
+      </div>
+
+      {/* Selo garantia */}
+      <div className="flex justify-end px-5 pb-5">
+        <span
+          className="inline-flex items-center gap-1.5 bg-ink-deep text-cream font-label uppercase tracking-[0.18em] text-[10px] font-bold px-3 py-1.5 rounded-sm"
+          title="Garantia WEG"
+        >
+          <span className="text-ocher" aria-hidden>
+            ★
+          </span>
+          GARANTIA WEG 10 ANOS
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function Spec({ k, v }: { k: string; v: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-0.5">
+      <dt className="font-label uppercase tracking-[0.12em] text-[10px] font-bold text-ink-soft">
+        {k}
+      </dt>
+      <dd className="text-ink text-[14px] font-semibold tabular-nums">{v}</dd>
+    </div>
+  );
+}
+
+/** Animação suave de número (count-up) usando rAF */
+function CountUp({
+  value,
+  duration = 450,
+  decimals = 0,
+}: {
+  value: number;
+  duration?: number;
+  decimals?: number;
+}) {
+  const [display, setDisplay] = useState(value);
+  const prev = useRef(value);
+
+  useEffect(() => {
+    const start = prev.current;
+    const end = value;
+    if (start === end) return;
+    const t0 = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - t0) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const v = start + (end - start) * eased;
+      setDisplay(v);
+      if (p < 1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        prev.current = end;
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value, duration]);
+
+  return <>{display.toFixed(decimals)}</>;
+}
+
+/** Fade rápido pra valores textuais quando mudam (ex: "15 CV" → "22 CV") */
+function AnimatedText({ value }: { value: string }) {
+  return (
+    <motion.span
+      key={value}
+      initial={{ opacity: 0, y: 4 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
+      className="inline-block"
+    >
+      {value}
+    </motion.span>
+  );
+}
+
+function inversorImage(modelo: string): string {
+  if (modelo.includes('CFW500')) return '/inversor-weg-cfw500.png';
+  if (modelo.includes('CFW900')) return '/inversor-weg-cfw900.png';
+  if (modelo.includes('SIW500')) return '/inversor-weg-siw500.png';
+  if (modelo.includes('SIW600')) return '/inversor-weg-siw600.png';
+  if (modelo.includes('SIW700')) return '/inversor-weg-siw700.png';
+  return '/inversor-weg.png';
+}
