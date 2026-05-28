@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --ink-deep: #0f1a12;
   --ink: #1a2a1f;
@@ -39,4 +43,58 @@ h4 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.75rem;
+}
+
+/* Botão gradiente solar (estética legacy) — terra → ocher */
+.solar-flare {
+  background: linear-gradient(135deg, var(--terra-deep) 0%, var(--ocher) 100%);
+}
+
+.solar-flare:hover {
+  background: linear-gradient(135deg, var(--terra-deep) 0%, var(--ocher-dark) 100%);
+}
+
+/* Badge outlined laranja (estética legacy) */
+.badge-outlined-ocher {
+  background: rgba(201, 155, 63, 0.15);
+  border: 1px solid rgba(201, 155, 63, 0.45);
+  color: var(--ocher);
+}
+
+/* Marquee mobile para AuthorityBar */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 35s linear infinite;
+  width: max-content;
+}
+
+@media (min-width: 768px) {
+  .marquee-track {
+    animation: none;
+    transform: none;
+    width: auto;
+  }
+}
+
+/* Scroll indicator bounce */
+@keyframes soft-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.scroll-indicator {
+  animation: soft-bounce 2s ease-in-out infinite;
 }
