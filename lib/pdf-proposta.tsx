@@ -6,37 +6,26 @@ import {
   StyleSheet,
   renderToBuffer,
 } from '@react-pdf/renderer';
-import { calcularKitCompleto, type KitCompleto } from './calcula-kit';
-import type { Aplicacao } from './configurador-schema';
-import { getSupabaseAdmin } from './supabase';
+import {
+  preparar,
+  brl,
+  formatDate,
+  type PropostaCalculada,
+  type PropostaDados,
+} from './pdf-proposta-engine';
 
-export interface PropostaItem {
-  descricao: string;
-  quantidade: number;
-  valor_unitario: number;
-}
-
-export interface PropostaDados {
-  numero: string;
-  data: Date;
-  cliente: {
-    nome: string;
-    empresa?: string;
-    cidade_uf?: string;
-    whatsapp?: string;
-  };
-  itens: PropostaItem[];
-  validade_dias: number;
-  observacoes?: string;
-  /** Se preenchido, sobrescreve itens com kit Irrigasolar via tabela WEG */
-  aplicacao?: Aplicacao;
-  dimensao_cv?: number;
-}
-
-export interface PropostaCalculada extends PropostaDados {
-  total: number;
-  kit?: KitCompleto;
-}
+// Re-exporta tipos e helpers de engine pra manter o módulo como ponto de entrada.
+export {
+  preparar,
+  proximoNumeroProposta,
+  brl,
+  formatDate,
+} from './pdf-proposta-engine';
+export type {
+  PropostaItem,
+  PropostaDados,
+  PropostaCalculada,
+} from './pdf-proposta-engine';
 
 const COR = {
   inkDeep: '#0F1A12',
@@ -68,20 +57,14 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     marginBottom: 24,
   },
-  brandWrap: {
-    flexDirection: 'column',
-  },
+  brandWrap: { flexDirection: 'column' },
   brand: {
     fontSize: 22,
     fontFamily: 'Helvetica-Bold',
     color: COR.inkDeep,
     letterSpacing: -0.4,
   },
-  tagline: {
-    fontSize: 9,
-    color: COR.inkSoft,
-    marginTop: 2,
-  },
+  tagline: { fontSize: 9, color: COR.inkSoft, marginTop: 2 },
   metaWrap: { alignItems: 'flex-end' },
   metaLabel: {
     fontFamily: 'Courier',
@@ -214,78 +197,11 @@ const styles = StyleSheet.create({
   },
 });
 
-function brl(v: number): string {
-  return v.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-}
-
-function formatDate(d: Date): string {
-  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
-
-/**
- * Aplica regras de negócio: se aplicacao + dimensao_cv informados, usa o kit
- * Irrigasolar da tabela WEG (sobrescreve itens e total).
- */
-function preparar(dados: PropostaDados): PropostaCalculada {
-  let kit: KitCompleto | undefined;
-  let itens = dados.itens;
-
-  if (dados.aplicacao && typeof dados.dimensao_cv === 'number') {
-    // Mapeia entrada do agente pra ConfiguradorData
-    const configuradorData = mapToConfiguradorData(dados.aplicacao, dados.dimensao_cv);
-    kit = calcularKitCompleto(configuradorData);
-    itens = [
-      {
-        descricao:
-          `Kit ${labelAplicacao(dados.aplicacao)} ${kit.potencia_cv} CV — ${kit.modulos.qtd} módulos ${kit.modulos.wp_unitario} Wp + inversor WEG ${kit.inversor.modelo} + IrrigaBox® inclusa`,
-        quantidade: 1,
-        valor_unitario: kit.valorBase,
-      },
-    ];
-  }
-
-  const total = itens.reduce((acc, i) => acc + i.quantidade * i.valor_unitario, 0);
-  return { ...dados, itens, total, kit };
-}
-
-function mapToConfiguradorData(aplicacao: Aplicacao, cv: number) {
-  switch (aplicacao) {
-    case 'poco':
-      return { aplicacao, pocoPotencia: cv } as const;
-    case 'pivo':
-      return { aplicacao, pivoPotencia: cv } as const;
-    case 'fazenda':
-      // CV aqui é interpretado como conta mensal em milhares
-      return { aplicacao, fazendaContaMensal: cv * 1000 } as const;
-    case 'multiplo':
-      return { aplicacao } as const;
-  }
-}
-
-function labelAplicacao(a: Aplicacao): string {
-  switch (a) {
-    case 'pivo':
-      return 'Pivô';
-    case 'poco':
-      return 'Bombeamento Solar';
-    case 'fazenda':
-      return 'Fazenda Solar';
-    case 'multiplo':
-      return 'Sistema Combinado';
-  }
-}
-
 function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
   const empresa = process.env.EMPRESA_NOME ?? 'Irrigasolar';
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header */}
         <View style={styles.header}>
           <View style={styles.brandWrap}>
             <Text style={styles.brand}>{empresa.toUpperCase()}</Text>
@@ -301,7 +217,6 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
           </View>
         </View>
 
-        {/* Cliente */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>// CLIENTE</Text>
           <View style={styles.clienteCard}>
@@ -330,7 +245,6 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
           </View>
         </View>
 
-        {/* Itens */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>// ITENS DA PROPOSTA</Text>
           <View style={styles.tableHead}>
@@ -367,7 +281,6 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
           </View>
         </View>
 
-        {/* Condições */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>// CONDIÇÕES</Text>
           <View style={styles.condicoes}>
@@ -420,28 +333,4 @@ export async function gerarPropostaPDF(dados: PropostaDados): Promise<{
   const buffer = await renderToBuffer(<DocumentProposta dados={calculada} />);
   const filename = `Proposta-${dados.numero}.pdf`;
   return { buffer, filename, calculada };
-}
-
-/**
- * Gera o próximo número sequencial da proposta no formato IRRI-YYYY-NNNN.
- * Conta as propostas do ano corrente no Supabase + 1.
- */
-export async function proximoNumeroProposta(): Promise<string> {
-  const year = new Date().getFullYear();
-  const start = `${year}-01-01T00:00:00Z`;
-  const end = `${year + 1}-01-01T00:00:00Z`;
-  try {
-    const supabase = getSupabaseAdmin();
-    const { count } = await supabase
-      .from('propostas')
-      .select('id', { count: 'exact', head: true })
-      .gte('created_at', start)
-      .lt('created_at', end);
-    const seq = (count ?? 0) + 1;
-    return `IRRI-${year}-${String(seq).padStart(4, '0')}`;
-  } catch {
-    // fallback sem DB
-    const seq = Math.floor(Math.random() * 9000) + 1000;
-    return `IRRI-${year}-${seq}`;
-  }
 }
