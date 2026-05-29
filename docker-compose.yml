@@ -9,7 +9,7 @@ services:
     container_name: irrigasolar-waha
     restart: unless-stopped
     ports:
-      - '3000:3000'
+      - '3030:3000'
     environment:
       # Auth para a API do WAHA (header X-Api-Key). NUNCA exponha pública sem isso.
       WHATSAPP_API_KEY: ${WAHA_API_KEY:?defina WAHA_API_KEY no .env}
