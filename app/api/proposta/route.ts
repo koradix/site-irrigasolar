@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { z, ZodError } from 'zod';
-import { gerarPropostaPDF, proximoNumeroProposta, type PropostaDados } from '@/lib/pdf-proposta';
-import { sendFile } from '@/lib/waha';
-import { getSupabaseAdmin } from '@/lib/supabase';
+import {
+  enviarPropostaCliente,
+  type EnviarPropostaResult,
+} from '@/lib/proposta-sender';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -14,7 +15,6 @@ const itemSchema = z.object({
 });
 
 const triggerSchema = z.object({
-  /** Telefone do cliente (com ou sem máscara/55) */
   phone: z.string().min(8),
   cliente: z.object({
     nome: z.string().min(2),
@@ -30,23 +30,11 @@ const triggerSchema = z.object({
   lead_id: z.string().uuid().optional(),
 });
 
-type TriggerBody = z.infer<typeof triggerSchema>;
-
-interface TriggerResponse {
-  success: boolean;
-  numero_proposta?: string;
-  message_id?: string;
-  error?: string;
-}
-
 /**
- * POST /api/proposta — gatilho do site/integração.
- * Autenticado via header X-Trigger-Secret (compara com PROPOSTA_TRIGGER_SECRET).
- *
- * Gera PDF, persiste, envia ao cliente pelo WhatsApp.
+ * POST /api/proposta — gatilho protegido por header X-Trigger-Secret.
+ * Gera PDF + envia pelo WhatsApp do cliente.
  */
-export async function POST(request: Request): Promise<NextResponse<TriggerResponse>> {
-  // Auth
+export async function POST(request: Request): Promise<NextResponse<EnviarPropostaResult>> {
   const expected = process.env.PROPOSTA_TRIGGER_SECRET;
   if (!expected) {
     return NextResponse.json(
@@ -58,8 +46,7 @@ export async function POST(request: Request): Promise<NextResponse<TriggerRespon
     return NextResponse.json({ success: false, error: 'unauthorized' }, { status: 401 });
   }
 
-  // Validate
-  let body: TriggerBody;
+  let body;
   try {
     body = triggerSchema.parse(await request.json());
   } catch (err) {
@@ -72,77 +59,7 @@ export async function POST(request: Request): Promise<NextResponse<TriggerRespon
     return NextResponse.json({ success: false, error: 'payload inválido' }, { status: 400 });
   }
 
-  // Gera
-  try {
-    const numero = await proximoNumeroProposta();
-    const dados: PropostaDados = {
-      numero,
-      data: new Date(),
-      cliente: { ...body.cliente, whatsapp: body.phone },
-      itens: body.itens,
-      validade_dias: body.validade_dias,
-      observacoes: body.observacoes,
-      aplicacao: body.aplicacao,
-      dimensao_cv: body.dimensao_cv,
-    };
-
-    const { buffer, filename, calculada } = await gerarPropostaPDF(dados);
-
-    // Persiste
-    let propostaRowId: string | null = null;
-    try {
-      const supabase = getSupabaseAdmin();
-      const { data } = await supabase
-        .from('propostas')
-        .insert({
-          chat_id: body.phone,
-          numero_proposta: numero,
-          dados: { ...dados, data: dados.data.toISOString() },
-          valor: calculada.total,
-          status: 'gerada',
-          lead_id: body.lead_id ?? null,
-        })
-        .select('id')
-        .single();
-      propostaRowId = data?.id ?? null;
-    } catch (err) {
-      console.error('[api/proposta] persistir falhou', err);
-    }
-
-    // Envia
-    const caption =
-      body.caption ?? `Proposta ${numero} pronta. Conferimos qualquer detalhe por aqui.`;
-    const send = await sendFile(body.phone, buffer, filename, caption);
-    if (!send.success) {
-      return NextResponse.json(
-        { success: false, numero_proposta: numero, error: send.error },
-        { status: 502 },
-      );
-    }
-
-    // Marca enviada
-    if (propostaRowId) {
-      try {
-        const supabase = getSupabaseAdmin();
-        await supabase
-          .from('propostas')
-          .update({ enviada_em: new Date().toISOString(), status: 'enviada' })
-          .eq('id', propostaRowId);
-      } catch (err) {
-        console.error('[api/proposta] update enviada_em falhou', err);
-      }
-    }
-
-    return NextResponse.json({
-      success: true,
-      numero_proposta: numero,
-      message_id: send.messageId,
-    });
-  } catch (err) {
-    console.error('[api/proposta] erro', err);
-    return NextResponse.json(
-      { success: false, error: err instanceof Error ? err.message : 'erro interno' },
-      { status: 500 },
-    );
-  }
+  const result = await enviarPropostaCliente(body);
+  const status = result.success ? 200 : 502;
+  return NextResponse.json(result, { status });
 }
