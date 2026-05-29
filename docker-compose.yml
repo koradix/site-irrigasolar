@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # WAHA (WhatsApp HTTP API) — self-hosted, gratuito.
+  # Docs: https://waha.devlike.pro
+  # Após subir, ler o QR Code em http://localhost:3000/dashboard
+  waha:
+    image: devlikeapro/waha
+    container_name: irrigasolar-waha
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      # Auth para a API do WAHA (header X-Api-Key). NUNCA exponha pública sem isso.
+      WHATSAPP_API_KEY: ${WAHA_API_KEY:?defina WAHA_API_KEY no .env}
+      # Webhook do backend Next.js — recebe eventos de mensagem.
+      # Em dev, exponha via ngrok/cloudflared e ajuste WEBHOOK_PUBLIC_URL.
+      WHATSAPP_HOOK_URL: ${WEBHOOK_PUBLIC_URL:-http://host.docker.internal:3001}/api/webhook/whatsapp
+      WHATSAPP_HOOK_EVENTS: 'message'
+      # Header opcional para autenticar o webhook no nosso backend.
+      WHATSAPP_HOOK_HMAC: ${WAHA_WEBHOOK_HMAC:-}
+    volumes:
+      - waha_sessions:/app/.sessions
+    # Permite que o container chame o Next.js rodando no host (Windows/Mac).
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+volumes:
+  waha_sessions:
+    name: irrigasolar_waha_sessions
