@@ -33,7 +33,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-rule">
       <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-3 md:px-8 lg:px-12">
-        <Logo />
+        <Logo priority />
 
         <nav aria-label="Navegação principal" className="hidden lg:flex items-center gap-7">
           {primaryNav.map((item) => (

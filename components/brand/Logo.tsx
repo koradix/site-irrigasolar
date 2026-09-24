@@ -1,38 +1,41 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
 
 interface LogoProps {
   className?: string;
-  /** Usar sobre fundo escuro (forest) inverte as cores. */
+  /** Usar sobre fundo escuro (forest) — troca para a versão branca do logo. */
   inverted?: boolean;
+  priority?: boolean;
 }
 
 /**
- * Marca em texto (wordmark), sóbria e tipográfica — substitui o logo
- * ilustrado anterior (estética varejista, fora da paleta) até que a
- * Irrigasolar forneça uma identidade visual revisada.
+ * Marca oficial da Irrigasolar (public/assets/img/logo-irrigasolar*.svg).
+ * A versão colorida é usada sobre fundos claros (paper/sand); a versão
+ * branca, sobre fundos escuros (forest — rodapé).
  */
-export function Logo({ className, inverted = false }: LogoProps) {
+export function Logo({ className, inverted = false, priority = false }: LogoProps) {
   return (
-    <Link
-      href="/"
-      className={cn(
-        'inline-flex flex-col leading-none select-none',
-        inverted ? 'text-paper' : 'text-forest',
-        className,
+    <Link href="/" className={cn('inline-flex items-center', className)}>
+      {inverted ? (
+        <Image
+          src="/assets/img/logo-irrigasolar-white.svg"
+          alt="Irrigasolar"
+          width={216}
+          height={90}
+          priority={priority}
+          className="h-11 w-auto md:h-12"
+        />
+      ) : (
+        <Image
+          src="/assets/img/logo-irrigasolar.svg"
+          alt="Irrigasolar"
+          width={204}
+          height={78}
+          priority={priority}
+          className="h-11 w-auto md:h-12"
+        />
       )}
-    >
-      <span className="font-display font-semibold text-xl md:text-2xl tracking-tight">
-        Irrigasolar
-      </span>
-      <span
-        className={cn(
-          'font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] mt-0.5',
-          inverted ? 'text-sand/70' : 'text-copper-text',
-        )}
-      >
-        Engenharia
-      </span>
     </Link>
   );
 }
