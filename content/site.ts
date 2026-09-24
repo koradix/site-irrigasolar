@@ -87,6 +87,8 @@ export interface Application {
   name: string;
   description: string;
   href: string;
+  image: string;
+  imageAlt: string;
 }
 
 export interface ProjectTestimonial {
@@ -203,24 +205,32 @@ export const applications: Application[] = [
     description:
       'Continuidade de energia para irrigação de alto valor e cargas de partida elevada.',
     href: '/aplicacoes/irrigacao',
+    image: '/assets/visuals/irrigacao-solar-offgrid.webp',
+    imageAlt: 'Visual conceitual de irrigação alimentada por energia solar no campo',
   },
   {
     slug: 'armazenagem-e-silos',
     name: 'Silos, secagem e armazenagem',
     description: 'Proteção de ventilação, secagem e movimentação de grãos contra paradas de energia.',
     href: '/aplicacoes/armazenagem-e-silos',
+    image: '/assets/visuals/bess-silos-agro.webp',
+    imageAlt: 'Visual conceitual de BESS integrado a uma operação de armazenagem de grãos',
   },
   {
     slug: 'cadeia-fria',
     name: 'Câmaras frias',
     description: 'Backup de cargas críticas para preservar temperatura e evitar perda de produto.',
     href: '/aplicacoes/cadeia-fria',
+    image: '/assets/visuals/cadeia-fria-agro.webp',
+    imageAlt: 'Visual conceitual de infraestrutura energética para cadeia fria agrícola',
   },
   {
     slug: 'leite-aves-suinos',
     name: 'Leite, aves e suínos',
     description: 'Continuidade para ordenha, resfriamento, ventilação e climatização de granjas.',
     href: '/aplicacoes/leite-aves-suinos',
+    image: '/assets/visuals/leite-ordenha-energia.webp',
+    imageAlt: 'Visual conceitual de ordenha e resfriamento de leite integrados à energia solar',
   },
 ];
 

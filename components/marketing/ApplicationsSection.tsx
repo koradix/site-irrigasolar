@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Section } from '@/components/ui/Section';
 import { Eyebrow } from '@/components/brand/Eyebrow';
@@ -20,10 +21,22 @@ export function ApplicationsSection() {
             <li key={a.slug}>
               <Link
                 href={a.href}
-                className="flex h-full flex-col rounded-sm border border-rule bg-sand p-6 transition-colors hover:border-forest"
+                className="group flex h-full flex-col overflow-hidden rounded-sm border border-rule bg-sand transition-colors hover:border-forest"
               >
-                <h3 className="font-display text-lg font-semibold text-forest">{a.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-graphite/75">{a.description}</p>
+                <div className="relative aspect-[4/3] overflow-hidden bg-forest/10">
+                  <Image
+                    src={a.image}
+                    alt={a.imageAlt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-forest/35 to-transparent" />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="font-display text-lg font-semibold text-forest">{a.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-graphite/75">{a.description}</p>
+                </div>
               </Link>
             </li>
           ))}

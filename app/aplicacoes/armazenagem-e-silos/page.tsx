@@ -15,6 +15,8 @@ export default function Page() {
         eyebrow: 'Aplicação',
         title: 'Silos, secagem e armazenagem',
         subtitle: 'Ventilação e secagem interrompidas no meio do processo colocam em risco o lote inteiro.',
+        heroImage: '/assets/visuals/bess-silos-agro.webp',
+        heroImageAlt: 'Visual conceitual de armazenagem de grãos integrada a BESS e geração solar',
         challenge: {
           heading: 'Um lote de grãos não espera a energia voltar.',
           body: 'Secadores e sistemas de ventilação de silos operam em ciclos contínuos. Uma parada durante a secagem ou a movimentação pode comprometer a qualidade e o valor de um lote armazenado.',

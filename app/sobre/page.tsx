@@ -24,6 +24,8 @@ export default function SobrePage() {
         eyebrow="Sobre"
         title="Engenharia de energia aplicada à realidade do campo."
         subtitle="A Irrigasolar trabalha na interseção entre energia e produção agropecuária: entender a operação antes de especificar qualquer equipamento."
+        imageSrc="/assets/visuals/engenharia-campo.webp"
+        imageAlt="Visual conceitual de uma equipe de engenharia trabalhando em uma instalação de energia no campo"
       />
 
       <Section tone="paper">

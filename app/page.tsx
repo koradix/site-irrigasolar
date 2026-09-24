@@ -29,6 +29,8 @@ export default function HomePage() {
         primaryCta={{ label: 'Solicitar diagnóstico energético', href: '/diagnostico' }}
         secondaryCta={{ label: 'Conhecer as soluções', href: '/#solucoes' }}
         microcopy="Análise inicial por especialista. Cada projeto é dimensionado para a realidade da operação."
+        imageSrc="/assets/visuals/hero-energia-agro.webp"
+        imageAlt="Visual conceitual de uma operação agrícola integrada a energia solar, armazenamento em baterias e irrigação"
       />
       <TrustBar />
       <ProblemSection />

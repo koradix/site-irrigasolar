@@ -15,6 +15,8 @@ export default function Page() {
         eyebrow: 'Aplicação',
         title: 'Leite, aves e suínos',
         subtitle: 'Ordenha, resfriamento e climatização de granjas dependem de energia constante para não comprometer produção e bem-estar animal.',
+        heroImage: '/assets/visuals/leite-ordenha-energia.webp',
+        heroImageAlt: 'Visual conceitual de ordenha, resfriamento de leite e energia solar em uma fazenda',
         challenge: {
           heading: 'Ventilação e climatização são vitais, não conveniência.',
           body: 'Em granjas de aves e suínos, ventilação e climatização mantêm o ambiente dentro de limites seguros para os animais. Na pecuária leiteira, a interrupção da ordenha e do resfriamento do leite tem efeito direto sobre a produção e a qualidade do produto.',

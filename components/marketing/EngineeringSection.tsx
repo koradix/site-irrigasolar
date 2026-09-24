@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Eyebrow } from '@/components/brand/Eyebrow';
 import { SerifHeading } from '@/components/brand/SerifHeading';
@@ -16,11 +17,22 @@ export function EngineeringSection() {
   return (
     <Section tone="sand">
       <div className="mx-auto max-w-content px-5 md:px-8 lg:px-12">
-        <div className="max-w-2xl">
-          <Eyebrow>Engenharia, segurança e suporte</Eyebrow>
-          <SerifHeading as="h2" size="lg" className="mt-4">
-            Cada decisão técnica é justificada pelo projeto, não por padrão de mercado.
-          </SerifHeading>
+        <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <Eyebrow>Engenharia, segurança e suporte</Eyebrow>
+            <SerifHeading as="h2" size="lg" className="mt-4">
+              Cada decisão técnica é justificada pelo projeto, não por padrão de mercado.
+            </SerifHeading>
+          </div>
+          <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-forest/10">
+            <Image
+              src="/assets/visuals/engenharia-campo.webp"
+              alt="Visual conceitual de engenheiros avaliando uma instalação de energia solar no campo"
+              fill
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

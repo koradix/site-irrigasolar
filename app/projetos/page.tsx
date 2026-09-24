@@ -22,6 +22,8 @@ export default function ProjetosPage() {
         eyebrow="Projetos"
         title="Portfólio real, sem estudo de caso genérico."
         subtitle="Cada projeto listado aqui tem escopo técnico, cliente e resultado verificáveis — nada de números ou depoimentos de exemplo."
+        imageSrc="/assets/visuals/hero-energia-agro.webp"
+        imageAlt="Visual conceitual de infraestrutura de energia integrada a uma operação agrícola"
       />
 
       <Section tone="paper">

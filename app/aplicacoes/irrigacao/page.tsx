@@ -15,6 +15,8 @@ export default function Page() {
         eyebrow: 'Aplicação',
         title: 'Pivôs, bombas e captação',
         subtitle: 'Irrigação de alto valor depende de energia disponível na janela certa — não no dia seguinte.',
+        heroImage: '/assets/visuals/irrigacao-solar-offgrid.webp',
+        heroImageAlt: 'Visual conceitual de irrigação, reservatório e bombeamento alimentados por energia solar',
         challenge: {
           heading: 'A janela de irrigação não espera a energia voltar.',
           body: 'Pivôs e bombas de captação têm potência de partida elevada e operam em janelas específicas do ciclo da cultura. Uma interrupção de energia nesse período pode comprometer o resultado da safra, não apenas a operação do dia.',

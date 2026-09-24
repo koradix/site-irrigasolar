@@ -26,6 +26,8 @@ export default function EngenhariaPage() {
         title="Projeto sob medida, da captação de dados à operação em campo."
         subtitle="Cada projeto — BESS, off-grid ou irrigação — segue o mesmo método: entender a operação real antes de especificar qualquer equipamento."
         primaryCta={{ label: 'Solicitar diagnóstico técnico', href: '/diagnostico' }}
+        imageSrc="/assets/visuals/engenharia-campo.webp"
+        imageAlt="Visual conceitual de engenheiros avaliando equipamentos de energia em uma operação agrícola"
       />
 
       <Section tone="paper">

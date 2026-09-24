@@ -11,6 +11,8 @@ export interface ApplicationPageContent {
   eyebrow: string;
   title: string;
   subtitle: string;
+  heroImage: string;
+  heroImageAlt: string;
   challenge: { heading: string; body: string };
   approach: { heading: string; body: string; points: string[] };
   considerations: { heading: string; body: string };
@@ -36,6 +38,8 @@ export function ApplicationPageTemplate({ content }: { content: ApplicationPageC
         title={content.title}
         subtitle={content.subtitle}
         primaryCta={{ label: 'Solicitar diagnóstico energético', href: '/diagnostico' }}
+        imageSrc={content.heroImage}
+        imageAlt={content.heroImageAlt}
       />
 
       <Section tone="paper">

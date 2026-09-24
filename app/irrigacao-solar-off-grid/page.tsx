@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Hero } from '@/components/marketing/Hero';
 import { Section } from '@/components/ui/Section';
 import { Card } from '@/components/ui/Card';
@@ -38,6 +39,27 @@ const SYSTEMS = [
 
 const CAPTACOES = ['Poços artesianos e semiartesianos', 'Rios e córregos', 'Represas', 'Reservatórios e cisternas'];
 
+const OFFGRID_VISUALS = [
+  {
+    src: '/assets/visuals/offgrid-poco-reservatorio.webp',
+    title: 'Poço solar com reservação',
+    description: 'Bombeamento durante o período solar para armazenar água e manter disponibilidade ao longo do dia.',
+    alt: 'Visual conceitual de poço com bombeamento solar e reservatório elevado em propriedade rural',
+  },
+  {
+    src: '/assets/visuals/offgrid-gotejamento-cafe.webp',
+    title: 'Irrigação localizada',
+    description: 'Energia solar aplicada ao bombeamento e gotejamento em culturas de maior valor agregado.',
+    alt: 'Visual conceitual de irrigação por gotejamento e bombeamento solar em cultivo de café',
+  },
+  {
+    src: '/assets/visuals/offgrid-pivo-solar.webp',
+    title: 'Pivô com bombeamento solar',
+    description: 'Captação, reservação e geração fotovoltaica dimensionadas como um único sistema de produção.',
+    alt: 'Visual conceitual de pivô irrigando uma lavoura com bombeamento solar off-grid',
+  },
+];
+
 export default function OffGridPage() {
   const faq = faqForPage('offgrid');
 
@@ -58,6 +80,8 @@ export default function OffGridPage() {
         subtitle="Para propriedades sem rede confiável, o bombeamento solar aproveita a energia do sol para levar água a um reservatório — a própria reservação já funciona como estratégia de autonomia da operação."
         primaryCta={{ label: 'Solicitar avaliação técnica', href: '/diagnostico' }}
         secondaryCta={{ label: 'Ver tipos de sistema', href: '#sistemas' }}
+        imageSrc="/assets/visuals/irrigacao-solar-offgrid.webp"
+        imageAlt="Visual conceitual de bombeamento solar off-grid com reservatório e pivô de irrigação"
       />
 
       <Section tone="paper">
@@ -88,6 +112,39 @@ export default function OffGridPage() {
               </p>
             </div>
           </div>
+        </div>
+      </Section>
+
+      <Section tone="paper">
+        <div className="mx-auto max-w-content px-5 md:px-8 lg:px-12">
+          <div className="max-w-2xl">
+            <Eyebrow>Aplicações off-grid</Eyebrow>
+            <SerifHeading as="h2" size="lg" className="mt-4">
+              A mesma fonte de energia, dimensionada para diferentes formas de irrigar.
+            </SerifHeading>
+          </div>
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {OFFGRID_VISUALS.map((visual) => (
+              <figure key={visual.src} className="overflow-hidden rounded-sm border border-rule bg-sand">
+                <div className="relative aspect-[3/2] overflow-hidden bg-forest/10">
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-500 hover:scale-[1.02]"
+                  />
+                </div>
+                <figcaption className="p-6">
+                  <h3 className="font-display text-xl font-semibold text-forest">{visual.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-graphite/75">{visual.description}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mt-4 text-xs leading-relaxed text-graphite/55">
+            Imagens conceituais. A configuração final depende do levantamento hidráulico, elétrico e da rotina de operação da propriedade.
+          </p>
         </div>
       </Section>
 

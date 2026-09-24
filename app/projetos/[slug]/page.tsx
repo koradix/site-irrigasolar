@@ -46,6 +46,8 @@ export default function ProjetoPage({ params }: Props) {
         eyebrow={`${project.segment} · ${project.city}/${project.state}`}
         title={project.title}
         subtitle={project.challenge}
+        imageSrc={project.cover}
+        imageAlt={project.cover ? `Projeto Irrigasolar em ${project.city}/${project.state}` : undefined}
       />
 
       <Section tone="paper">

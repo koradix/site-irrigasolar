@@ -53,6 +53,8 @@ export default function BessPage() {
         subtitle="BESS (Battery Energy Storage System) integra baterias, solar, rede e gerador para proteger cargas críticas, reduzir exposição a falhas de energia e dar mais previsibilidade à operação."
         primaryCta={{ label: 'Solicitar diagnóstico energético', href: '/diagnostico' }}
         secondaryCta={{ label: 'Ver aplicações no agro', href: '#aplicacoes' }}
+        imageSrc="/assets/visuals/bess-silos-agro.webp"
+        imageAlt="Visual conceitual de sistema BESS integrado a silos e geração solar no agronegócio"
       />
 
       <Section tone="paper">

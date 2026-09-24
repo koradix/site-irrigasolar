@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { LinkButton } from '@/components/ui/LinkButton';
 import { trackEvent } from '@/lib/analytics';
 
@@ -8,27 +9,47 @@ interface HeroProps {
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   microcopy?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
-/**
- * Hero institucional sem carrossel e sem fotografia — até que a Irrigasolar
- * forneça fotografia real e autorizada da operação (ver README de
- * public/assets/portfolio), o hero usa uma composição tipográfica sóbria em
- * vez de arriscar publicar imagem de banco/IA como se fosse real.
- */
-export function Hero({ eyebrow, title, subtitle, primaryCta, secondaryCta, microcopy }: HeroProps) {
+export function Hero({
+  eyebrow,
+  title,
+  subtitle,
+  primaryCta,
+  secondaryCta,
+  microcopy,
+  imageSrc,
+  imageAlt = '',
+}: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-forest text-paper">
+    <section className="relative min-h-[620px] overflow-hidden bg-forest text-paper md:min-h-[700px]">
+      {imageSrc && (
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      )}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,25,17,0.98)_0%,rgba(8,25,17,0.92)_38%,rgba(8,25,17,0.50)_68%,rgba(8,25,17,0.16)_100%)]"
+      />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-forest/55 via-transparent to-forest/15" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
             'linear-gradient(#FCFBF7 1px, transparent 1px), linear-gradient(90deg, #FCFBF7 1px, transparent 1px)',
           backgroundSize: '48px 48px',
         }}
       />
-      <div className="relative mx-auto max-w-content px-5 py-20 md:px-8 md:py-28 lg:px-12 lg:py-36">
+      <div className="relative mx-auto flex min-h-[620px] max-w-content items-center px-5 py-24 md:min-h-[700px] md:px-8 lg:px-12">
         <div className="max-w-2xl">
           {eyebrow && (
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-copper-text-inverse">{eyebrow}</p>

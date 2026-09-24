@@ -15,6 +15,8 @@ export default function Page() {
         eyebrow: 'Aplicação',
         title: 'Câmaras frias',
         subtitle: 'Minutos sem refrigeração podem significar a perda de um lote inteiro de produto.',
+        heroImage: '/assets/visuals/cadeia-fria-agro.webp',
+        heroImageAlt: 'Visual conceitual de uma operação de cadeia fria agrícola com infraestrutura de energia',
         challenge: {
           heading: 'A temperatura não perdoa interrupção.',
           body: 'Câmaras frias e resfriadores dependem de energia contínua para manter a temperatura dentro da faixa segura. Uma queda de poucos minutos, dependendo da carga térmica e do isolamento, já pode comprometer o produto armazenado.',
