@@ -53,7 +53,7 @@ export function ObrigadoView() {
               className="relative w-32 h-32 md:w-40 md:h-40"
             >
               <Image
-                src="/mascote.png"
+                src="/mascote.webp"
                 alt="Mascote Irrigasolar acenando"
                 fill
                 sizes="160px"
@@ -66,7 +66,7 @@ export function ObrigadoView() {
           {/* Headline */}
           <div className="space-y-4">
             <p className="font-label uppercase tracking-[0.2em] text-xs text-ocher-dark font-bold">
-              // Recebido pela engenharia
+              {'// Recebido pela engenharia'}
             </p>
             <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-ink-deep leading-[1.05]">
               {primeiroNome ? `Pronto, ${primeiroNome}!` : 'Pronto!'}
@@ -116,7 +116,7 @@ export function ObrigadoView() {
 
               <div className="mt-5 pt-4 border-t border-rule bg-ocher-dark/10 border-l-4 border-ocher px-4 py-3 -mx-2">
                 <p className="text-[13px] text-ink-deep font-bold">
-                  ✓ IrrigaBox<sup>®</sup> inclusa · Garantia WEG 10 anos
+                  ✓ IrrigaBox<sup>®</sup> inclusa · garantia e condições confirmadas na proposta
                 </p>
               </div>
             </motion.div>

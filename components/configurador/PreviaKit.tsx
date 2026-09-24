@@ -32,7 +32,7 @@ function Placeholder() {
         className="relative w-32 h-32 md:w-40 md:h-40"
       >
         <Image
-          src="/mascote.png"
+          src="/mascote.webp"
           alt="Mascote Irrigasolar"
           fill
           sizes="160px"
@@ -40,7 +40,7 @@ function Placeholder() {
         />
       </motion.div>
       <p className="font-label uppercase tracking-[0.18em] text-xs text-ocher-dark font-bold">
-        // Aguarde
+        {'// Aguarde'}
       </p>
       <h4 className="font-headline text-2xl md:text-3xl font-semibold text-ink-deep leading-tight max-w-xs">
         Vamos montar seu kit em 90 segundos
@@ -67,15 +67,14 @@ function KitCard({ data }: { data: ConfiguradorData }) {
         </p>
       </header>
 
-      {/* Imagem inversor */}
-      <div className="relative aspect-[4/3] bg-cream border-b border-rule">
-        <Image
-          src={inversorImage(kit.inversor.modelo)}
-          alt={`Inversor ${kit.inversor.modelo}`}
-          fill
-          sizes="(min-width: 1024px) 35vw, 100vw"
-          className="object-contain p-8"
-        />
+      {/* Ficha do inversor selecionado (sem foto — modelo real confirmado na proposta) */}
+      <div className="flex aspect-[4/3] flex-col items-center justify-center gap-2 bg-cream border-b border-rule px-6 text-center">
+        <span className="font-label uppercase tracking-[0.15em] text-[11px] font-bold text-ink-soft">
+          Inversor selecionado
+        </span>
+        <span className="font-headline text-2xl font-semibold text-ink-deep">
+          {kit.inversor.modelo}
+        </span>
       </div>
 
       {/* Ficha técnica */}
@@ -138,23 +137,13 @@ function KitCard({ data }: { data: ConfiguradorData }) {
           IrrigaBox<sup>®</sup> inclusa em todo kit
         </p>
         <p className="text-ink-soft text-[12px] mt-1.5 leading-relaxed">
-          Controle de temperatura · umidade · segurança operacional · garantia de serviço estendida
-          para 18 meses
+          Controle de temperatura · umidade · segurança operacional
         </p>
       </div>
 
-      {/* Selo garantia */}
-      <div className="flex justify-end px-5 pb-5">
-        <span
-          className="inline-flex items-center gap-1.5 bg-ink-deep text-cream font-label uppercase tracking-[0.18em] text-[10px] font-bold px-3 py-1.5 rounded-sm"
-          title="Garantia WEG"
-        >
-          <span className="text-ocher" aria-hidden>
-            ★
-          </span>
-          GARANTIA WEG 10 ANOS
-        </span>
-      </div>
+      <p className="px-5 pb-5 text-right text-[11px] text-ink-soft/70">
+        Garantia e condições de pagamento confirmadas pela engenharia na proposta.
+      </p>
     </div>
   );
 }
@@ -220,13 +209,4 @@ function AnimatedText({ value }: { value: string }) {
       {value}
     </motion.span>
   );
-}
-
-function inversorImage(modelo: string): string {
-  if (modelo.includes('CFW500')) return '/inversor-weg-cfw500.png';
-  if (modelo.includes('CFW900')) return '/inversor-weg-cfw900.png';
-  if (modelo.includes('SIW500')) return '/inversor-weg-siw500.png';
-  if (modelo.includes('SIW600')) return '/inversor-weg-siw600.png';
-  if (modelo.includes('SIW700')) return '/inversor-weg-siw700.png';
-  return '/inversor-weg.png';
 }

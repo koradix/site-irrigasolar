@@ -84,7 +84,6 @@ function PocoForm({
   update: (p: Partial<ConfiguradorData>) => void;
 }) {
   const potencia = data.pocoPotencia ?? 15;
-  const profundidade = data.pocoProfundidade ?? 60;
   return (
     <div className="space-y-6">
       <div className="space-y-2">

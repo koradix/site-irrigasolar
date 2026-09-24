@@ -23,7 +23,6 @@ export function Step0Contato({ data, update, onNext }: Props) {
   const {
     register,
     handleSubmit,
-    setValue,
     watch,
     formState: { errors },
   } = useForm<Step0Values>({

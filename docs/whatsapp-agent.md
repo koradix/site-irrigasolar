@@ -160,7 +160,7 @@ Quando o cliente termina o configurador na LP, o backend dispara automaticamente
 
 Definidos em [lib/claude.ts](../lib/claude.ts):
 
-- **`SYSTEM_PROMPT`** — identidade, tom, escopo Irrigasolar, regras inegociáveis (nunca inventar preços, sempre tool, garantia padrão 10+18, prazo "engenharia confirma").
+- **`SYSTEM_PROMPT`** — identidade, tom, escopo Irrigasolar, regras inegociáveis (nunca inventar preços, sempre tool, nunca afirmar garantia/financiamento por conta própria, prazo "engenharia confirma").
 - **`GERAR_PROPOSTA_TOOL`** — schema da ferramenta. Aceita `itens` livres OU (`aplicacao` + `dimensao_cv`) para a engine WEG recalcular tudo automaticamente.
 
 Pra ajustar o tom do agente, edite o `SYSTEM_PROMPT`. Pra adicionar uma nova ferramenta (consultar CRM, agendar visita), defina ela como `Tool` e adicione no array passado a `messages.create`.

@@ -2,32 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Paleta premium — engenharia aplicada ao agronegócio (ver PROMPT-REESTRUTURACAO-SITE-IRRIGASOLAR.md).
+     Contraste checado para WCAG AA:
+     - graphite (#18201C) sobre paper (#FCFBF7): ~15.5:1 — texto corrido ok.
+     - paper sobre forest (#10271D): ~14.8:1 — texto corrido ok.
+     - copper (#B97832) sobre paper: ~3.2:1 — usar apenas em texto grande
+       (>=24px/bold), ícones, bordas e badges; nunca em texto corrido pequeno.
+     - solar (#E4AD32) é reservado para realces pontuais (traço, ícone,
+       sublinhado) — nunca como cor de texto corrido. */
+  --color-forest: #10271d;
+  --color-forest-light: #244c3a;
+  --color-sand: #f3efe6;
+  --color-paper: #fcfbf7;
+  --color-graphite: #18201c;
+  --color-copper: #b97832;
+  --color-solar: #e4ad32;
+  --color-rule: #ddd6c6;
+
+  /* Variantes de texto do cobre: --color-copper (#B97832) só atinge ~3.2:1
+     de contraste em texto pequeno — reservado para bordas, ícones, textos
+     grandes/bold. Para rótulos pequenos (Eyebrow, dt, cabeçalhos de rodapé)
+     usar estas variantes, que passam AA (>=4.5:1) no fundo correspondente. */
+  --color-copper-text: #8a5a22; /* sobre paper/sand — contraste ~5.6:1 */
+  --color-copper-text-inverse: #c68540; /* sobre forest — contraste ~5.1:1 */
+
+  /* Tokens legados — exclusivos do fluxo /loja e /obrigado (ver tailwind.config.ts). */
+  --legacy-ink-deep: #0f1a12;
+  --legacy-ink-soft: #4a5a4a;
+  --legacy-ocher: #c99b3f;
+  --legacy-ocher-dark: #8a6b22;
+  --legacy-terra: #b8593e;
+  --legacy-terra-deep: #8a4530;
+  --legacy-green: #2d4a2a;
+  --legacy-cream: #f8f2e0;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-:root {
-  --ink-deep: #0f1a12;
-  --ink: #1a2a1f;
-  --ink-soft: #4a5a4a;
-  --ocher: #c99b3f;
-  --ocher-dark: #8a6b22;
-  --terra: #b8593e;
-  --terra-deep: #8a4530;
-  --green: #2d4a2a;
-  --cream: #f8f2e0;
-  --paper: #fbf7ec;
-  --rule: #b8a878;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 html,
 body {
-  background-color: var(--paper);
-  color: var(--ink);
+  background-color: var(--color-paper);
+  color: var(--color-graphite);
 }
 
 body {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-family: var(--font-manrope), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -35,34 +71,36 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  letter-spacing: -0.015em;
+  font-family: var(--font-source-serif), Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
-.label-editorial {
-  font-family: 'Courier New', Courier, monospace;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
+/* Foco visível consistente em todo o site (WCAG 2.2 AA). */
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
-/* Botão gradiente solar (estética legacy) — terra → ocher */
-.solar-flare {
-  background: linear-gradient(135deg, var(--terra-deep) 0%, var(--ocher) 100%);
+/* Skip link — visível apenas ao ganhar foco via teclado. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  background: var(--color-forest);
+  color: var(--color-paper);
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: top 0.15s ease-out;
 }
 
-.solar-flare:hover {
-  background: linear-gradient(135deg, var(--terra-deep) 0%, var(--ocher-dark) 100%);
+.skip-link:focus {
+  top: 1rem;
 }
 
-/* Badge outlined laranja (estética legacy) */
-.badge-outlined-ocher {
-  background: rgba(201, 155, 63, 0.15);
-  border: 1px solid rgba(201, 155, 63, 0.45);
-  color: var(--ocher);
-}
-
-/* Marquee mobile para AuthorityBar */
+/* Marquee mobile — legado, usado só por /loja se necessário. */
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -85,17 +123,17 @@ h4 {
   }
 }
 
-/* Scroll indicator bounce */
-@keyframes soft-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(8px);
-  }
+/* Botão gradiente solar (estética legado /loja). */
+.solar-flare {
+  background: linear-gradient(135deg, var(--legacy-terra-deep) 0%, var(--legacy-ocher) 100%);
 }
 
-.scroll-indicator {
-  animation: soft-bounce 2s ease-in-out infinite;
+.solar-flare:hover {
+  background: linear-gradient(135deg, var(--legacy-terra-deep) 0%, var(--legacy-ocher-dark) 100%);
+}
+
+.badge-outlined-ocher {
+  background: rgba(201, 155, 63, 0.15);
+  border: 1px solid rgba(201, 155, 63, 0.45);
+  color: var(--legacy-ocher);
 }

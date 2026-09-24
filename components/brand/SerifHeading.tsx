@@ -7,28 +7,15 @@ interface SerifHeadingProps extends HTMLAttributes<HTMLHeadingElement> {
 }
 
 const sizeStyles = {
-  sm: 'text-3xl md:text-4xl',
-  md: 'text-4xl md:text-5xl',
-  lg: 'text-5xl md:text-6xl',
-  xl: 'text-5xl md:text-7xl lg:text-8xl',
+  sm: 'text-2xl md:text-3xl',
+  md: 'text-3xl md:text-4xl',
+  lg: 'text-4xl md:text-5xl',
+  xl: 'text-4xl md:text-6xl',
 } as const;
 
-export function SerifHeading({
-  className,
-  as: Tag = 'h1',
-  size = 'lg',
-  children,
-  ...props
-}: SerifHeadingProps) {
+export function SerifHeading({ className, as: Tag = 'h2', size = 'lg', children, ...props }: SerifHeadingProps) {
   return (
-    <Tag
-      className={cn(
-        'font-headline font-semibold text-ink-deep leading-[1.05] tracking-tight',
-        sizeStyles[size],
-        className,
-      )}
-      {...props}
-    >
+    <Tag className={cn('font-display font-semibold text-forest leading-[1.1] tracking-tight', sizeStyles[size], className)} {...props}>
       {children}
     </Tag>
   );

@@ -84,6 +84,42 @@ create index if not exists propostas_chat_id_idx on propostas(chat_id);
 alter table propostas enable row level security;
 
 -- =========================================================
+-- DIAGNOSTICOS — capturados pelo formulário consultivo /diagnostico
+-- =========================================================
+create table if not exists diagnosticos (
+  id uuid primary key default uuid_generate_v4(),
+  created_at timestamptz default now(),
+  nome text not null,
+  empresa_fazenda text not null,
+  telefone text not null,
+  email text,
+  municipio text not null,
+  uf text not null,
+  tipo_operacao text not null,
+  problemas text[] not null,
+  relato text,
+  possui_solar boolean not null,
+  possui_gerador boolean not null,
+  possui_media_tensao text not null,
+  cargas_criticas text,
+  faixa_conta_mensal text not null,
+  demanda_contratada_kw text,
+  horas_autonomia_desejada text not null,
+  status text default 'novo'
+);
+
+create index if not exists diagnosticos_created_at_idx on diagnosticos(created_at desc);
+create index if not exists diagnosticos_status_idx on diagnosticos(status);
+
+alter table diagnosticos enable row level security;
+
+drop policy if exists "anon can insert diagnosticos" on diagnosticos;
+create policy "anon can insert diagnosticos"
+  on diagnosticos for insert
+  to anon
+  with check (true);
+
+-- =========================================================
 -- Função utilitária: limpa conversas expiradas
 -- Rode via cron do Supabase (pg_cron) ou chame manualmente.
 -- =========================================================

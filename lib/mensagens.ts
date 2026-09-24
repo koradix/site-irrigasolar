@@ -37,7 +37,6 @@ export function montarMensagemMae(ctx: MensagemContext): string {
     `• Vazão estimada: ${kit.vazao_estimada} m³/h`,
     `• Potência total: ${kit.kwp} kWp`,
     '• ✓ IrrigaBox® de monitoramento (temperatura, umidade, segurança)',
-    '• Garantia WEG 10 anos + 18 meses de serviço estendido',
     '',
     `💰 Investimento turn-key chave em mão: *${brl(kit.valorBase)}*`,
     'Incluso: equipamento + IrrigaBox + acabamento elétrico + instalação.',

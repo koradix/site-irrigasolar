@@ -208,7 +208,7 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
             <Text style={styles.tagline}>Engenharia solar WEG para o agronegócio</Text>
           </View>
           <View style={styles.metaWrap}>
-            <Text style={styles.metaLabel}>// PROPOSTA</Text>
+            <Text style={styles.metaLabel}>{'// PROPOSTA'}</Text>
             <Text style={styles.metaValue}>{dados.numero}</Text>
             <Text style={styles.metaLabel}>EMITIDA EM</Text>
             <Text style={styles.metaValue}>{formatDate(dados.data)}</Text>
@@ -218,7 +218,7 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>// CLIENTE</Text>
+          <Text style={styles.sectionTitle}>{'// CLIENTE'}</Text>
           <View style={styles.clienteCard}>
             <View style={styles.clienteRow}>
               <Text style={styles.clienteLabel}>NOME</Text>
@@ -246,7 +246,7 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>// ITENS DA PROPOSTA</Text>
+          <Text style={styles.sectionTitle}>{'// ITENS DA PROPOSTA'}</Text>
           <View style={styles.tableHead}>
             <Text style={[styles.th, styles.colDescricao]}>DESCRIÇÃO</Text>
             <Text style={[styles.th, styles.colQtd]}>QTD</Text>
@@ -275,26 +275,21 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
               <Text style={{ fontFamily: 'Helvetica-Bold' }}>
                 ✓ IrrigaBox® de monitoramento inclusa.
               </Text>{' '}
-              Controle de temperatura, umidade e segurança operacional. Garantia de serviço
-              estendida pra 18 meses.
+              Controle de temperatura, umidade e segurança operacional.
             </Text>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>// CONDIÇÕES</Text>
+          <Text style={styles.sectionTitle}>{'// CONDIÇÕES'}</Text>
           <View style={styles.condicoes}>
-            <Text style={styles.condicaoItem}>
-              • Garantia: 10 anos no equipamento WEG + 18 meses de serviço estendido pela
-              IrrigaBox®
-            </Text>
             <Text style={styles.condicaoItem}>
               • Inclusos: equipamento, IrrigaBox, acabamento elétrico, instalação e
               comissionamento
             </Text>
             <Text style={styles.condicaoItem}>
-              • Forma de pagamento: condições negociadas no fechamento (BNDES, FCO ou recursos
-              próprios)
+              • Garantia e forma de pagamento: confirmadas pela engenharia no fechamento, conforme
+              o equipamento especificado
             </Text>
             <Text style={styles.condicaoItem}>
               • Prazo de execução: confirmado pela engenharia após visita técnica
@@ -307,7 +302,7 @@ function DocumentProposta({ dados }: { dados: PropostaCalculada }) {
 
         {dados.observacoes && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>// OBSERVAÇÕES</Text>
+            <Text style={styles.sectionTitle}>{'// OBSERVAÇÕES'}</Text>
             <Text style={styles.observacoes}>{dados.observacoes}</Text>
           </View>
         )}

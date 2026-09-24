@@ -33,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = 'Input';
 
-interface FieldLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {}
+type FieldLabelProps = LabelHTMLAttributes<HTMLLabelElement>;
 
 export function FieldLabel({ className, children, ...props }: FieldLabelProps) {
   return (

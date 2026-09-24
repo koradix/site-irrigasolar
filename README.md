@@ -1,133 +1,163 @@
-# Irrigasolar — Landing Page + Agente Comercial
+# Irrigasolar Engenharia — Site institucional
 
-Site institucional / landing page da Irrigasolar com:
+Site institucional da Irrigasolar Engenharia: engenharia de energia para
+operações críticas do agronegócio (BESS, energia solar e irrigação
+off-grid), com formulário de diagnóstico consultivo e, como canal
+secundário, um configurador de kit solar (`/loja`) com geração automática de
+proposta em PDF via WhatsApp.
 
-- **Configurador interativo** de kit solar (5 steps, ramificação por aplicação)
-- **Engine de cálculo** baseada na tabela WEG (poço CV / pivô kWp / fazenda R$ mensal)
-- **API de captura de leads** com persistência Supabase + email pra equipe via Resend
-- **Agente de WhatsApp com Claude** que atende clientes, qualifica e envia propostas em PDF automaticamente
-- **Geração de PDF profissional** da proposta com a paleta editorial Irrigasolar
-- **Dois gatilhos** pra envio de proposta: conversa no WhatsApp ou trigger do site
+> Toda alegação factual do site (dados institucionais, credenciais,
+> projetos, depoimentos) vem de `content/site.ts`. Nada é inventado — campos
+> sem comprovação ficam vazios/`undefined` e o componente correspondente não
+> renderiza. Veja a seção **Conteúdo real pendente** abaixo.
 
 ## Stack
 
-- **Next.js 14** (App Router) + **TypeScript**
-- **Tailwind CSS** com paleta customizada Irrigasolar (CSS vars + tokens)
-- **Framer Motion** — animações sutis e transições do configurador
-- **react-hook-form** + **Zod** — formulários e validação
-- **@tanstack/react-query** — fetching reativo
-- **@anthropic-ai/sdk** — Claude (agente WhatsApp, com tool use)
-- **@react-pdf/renderer** — PDF da proposta
-- **@supabase/supabase-js** — banco (leads, conversations, propostas)
-- **resend** — email pro time
-- **WAHA** (Docker, gratuito) — WhatsApp HTTP API
-- **Vitest** — testes (19 specs)
+- **Next.js 14** (App Router) + **TypeScript** estrito
+- **Tailwind CSS** — paleta e tipografia definidas em `tailwind.config.ts` / `app/globals.css`
+- **react-hook-form** + **Zod** — formulários e validação (diagnóstico e configurador)
+- **@supabase/supabase-js** — persistência de leads/diagnósticos/conversas
+- **resend** — notificação por e-mail para a equipe
+- **@anthropic-ai/sdk** — agente de WhatsApp (fluxo `/loja`)
+- **@react-pdf/renderer** — PDF de proposta (fluxo `/loja`)
+- **WAHA** (Docker) — WhatsApp HTTP API
+- **sharp** — otimização de imagens (script `images:optimize`)
+- **Vitest** — testes
 
 ## Estrutura
 
 ```
 app/
-├── page.tsx                              # LP completa
-├── obrigado/                             # tela pós-envio do configurador
+├── page.tsx                        # Home institucional
+├── bess-agronegocio/                # BESS para o agro
+├── irrigacao-solar-off-grid/        # Irrigação solar off-grid
+├── engenharia/                      # Método de engenharia
+├── projetos/[slug]/                 # Portfólio (dinâmico, vazio até ter projetos reais)
+├── sobre/                           # Institucional, equipe, credenciais
+├── diagnostico/                     # Formulário consultivo (6 etapas)
+├── aplicacoes/*/                    # Páginas por cadeia produtiva
+├── privacidade/, termos/            # Políticas
+├── loja/                            # Canal secundário: configurador de kit solar
+├── obrigado/                        # Pós-envio do configurador de kit
 ├── api/
-│   ├── configurador/route.ts             # captura de lead + email + PDF WhatsApp
-│   ├── proposta/route.ts                 # gatilho do site (X-Trigger-Secret)
-│   └── webhook/whatsapp/route.ts         # webhook WAHA → agente Claude
-└── globals.css
+│   ├── diagnostico/route.ts         # Captura do diagnóstico + fallback WhatsApp
+│   ├── configurador/route.ts        # Captura de lead do configurador de kit
+│   ├── proposta/route.ts            # Gatilho protegido de reenvio de proposta
+│   └── webhook/whatsapp/route.ts    # Webhook do agente WhatsApp (WAHA)
+├── robots.ts, sitemap.ts, manifest.ts, icon.png
+
+content/
+└── site.ts                          # Fonte central de conteúdo verdadeiro (ver abaixo)
 
 components/
-├── sections/                             # Hero, AuthorityBar, ProvaSocial, IrrigaBox, FAQ, Footer
-├── configurador/                         # 5 steps + StepNumbers + PreviaKit reativo
-├── ui/                                   # Container, Button, Badge, Card, Section, Input
-└── brand/                                # Logo, Kicker, SerifHeading
+├── marketing/                       # Seções reutilizáveis (Hero, FAQ, Process, etc.)
+├── diagnostico/                     # Formulário de diagnóstico (6 etapas)
+├── forms/                           # Inputs acessíveis (TextField, RadioGroupField...)
+├── layout/                          # Header, Footer, WhatsAppFloat
+├── seo/                             # JsonLd
+├── ui/, brand/                      # Primitivos (Button, Card, Section, Logo, Eyebrow...)
+└── configurador/                    # Fluxo legado do kit solar (usado só em /loja)
 
 lib/
-├── calcula-kit.ts + tabela-weg.json      # engine de cálculo do kit
-├── configurador-schema.ts                # Zod schemas (front + API payload)
-├── claude.ts                             # SYSTEM_PROMPT + tool gerar_proposta + runTurn
-├── conversa.ts                           # memória persistida no Supabase
-├── waha.ts                               # cliente WhatsApp HTTP API
-├── pdf-proposta-engine.ts                # lógica pura (preparar, número sequencial)
-├── pdf-proposta.tsx                      # componente DocumentProposta + render PDF
-├── proposta-sender.ts                    # gera + persiste + envia (compartilhado)
-├── agente.ts                             # orquestrador conversacional
-├── email.ts + proposta.ts                # HTML email pro time (Resend)
-├── supabase.ts                           # getSupabase (anon) + getSupabaseAdmin (service_role)
-├── contato.ts                            # WhatsApp comercial centralizado
-└── cn.ts, env.ts, mensagens.ts, etc.
+├── schema.ts, diagnostico-schema.ts, diagnostico-mensagem.ts, diagnostico-email.ts
+├── analytics.ts                     # Helper de eventos (window.dataLayer)
+├── calcula-kit.ts + tabela-weg.json # Engine de cálculo do kit solar (/loja)
+├── pdf-proposta*.ts, proposta*.ts   # Geração de PDF e e-mail (/loja)
+├── claude.ts, agente.ts, conversa.ts, waha.ts  # Agente de WhatsApp (/loja)
+└── contato.ts, cn.ts, env.ts, supabase.ts
 
-supabase/schema.sql                       # tabelas leads + conversations + propostas
-docker-compose.yml                        # serviço WAHA (porta 3000)
-docs/
-├── n8n-setup.md                          # workflows futuros
-└── whatsapp-agent.md                     # setup detalhado do agente
-
-__tests__/                                # 19 specs (calcula-kit + pdf-proposta)
+scripts/optimize-images.mjs          # Converte fotos para WebP (sem serviço externo)
+public/assets/portfolio/README.md    # Como cadastrar fotos de projetos
+next.config.mjs                      # Headers de segurança, incl. CSP
+supabase/schema.sql                  # Tabelas leads/diagnosticos/conversations/propostas
+__tests__/                           # Testes (schemas, engine de cálculo, PDF)
 ```
 
 ## Como rodar
 
-### Modo simples (só LP, sem agente)
-
 ```bash
 npm install
 cp .env.example .env.local
-# preencha SUPABASE_*, RESEND_*, EMAIL_TO_EQUIPE
 npm run dev
 ```
 
-Abre em [http://localhost:3001](http://localhost:3001).
+Abre em [http://localhost:3001](http://localhost:3001) (ou 3000 conforme sua config local).
 
-### Modo completo (LP + agente WhatsApp + PDF)
+O site funciona sem nenhuma variável de ambiente configurada: os formulários
+sempre devolvem um link de WhatsApp com a mensagem estruturada como
+fallback. Preencha `SUPABASE_*` e `RESEND_*`/`EMAIL_TO_EQUIPE` para persistir
+os envios e notificar a equipe por e-mail.
 
-Configure as variáveis extras no `.env.local`:
-
-```
-ANTHROPIC_API_KEY=
-ANTHROPIC_MODEL=claude-haiku-4-5
-WAHA_BASE_URL=http://localhost:3000
-WAHA_SESSION=default
-WAHA_API_KEY=defina-uma-chave-forte-aqui
-WEBHOOK_PUBLIC_URL=https://seu-ngrok.ngrok-free.app
-PROPOSTA_TRIGGER_SECRET=outra-chave-forte
-```
-
-Suba a infraestrutura:
-
-```bash
-# 1. SQL no Supabase (cole supabase/schema.sql no SQL Editor)
-# 2. Docker WAHA
-docker compose up -d waha
-# 3. Em outro terminal: expõe o backend
-ngrok http 3001
-# atualize WEBHOOK_PUBLIC_URL no .env.local com a URL ngrok
-docker compose restart waha
-# 4. Next.js
-npm run dev
-```
-
-Escaneie o QR Code em [http://localhost:3000/dashboard](http://localhost:3000/dashboard) com o WhatsApp Business.
-
-Detalhes em [docs/whatsapp-agent.md](docs/whatsapp-agent.md).
+Para o fluxo completo de `/loja` (agente de WhatsApp + PDF automático), veja
+[docs/whatsapp-agent.md](docs/whatsapp-agent.md).
 
 ## Scripts
 
 | Comando | O que faz |
 |---|---|
-| `npm run dev` | Dev server (port 3001) |
+| `npm run dev` | Dev server |
 | `npm run build` | Build de produção |
 | `npm run start` | Serve o build |
 | `npm run lint` | ESLint |
-| `npm run format` | Prettier write |
 | `npm run typecheck` | TypeScript sem emitir |
-| `npm test` | Vitest run (19 specs) |
-| `npm run test:watch` | Vitest watch mode |
+| `npm test` | Vitest run |
+| `npm run images:optimize -- <pasta-ou-arquivo>` | Converte PNG/JPG para WebP |
+
+## Conteúdo real pendente
+
+Estes pontos precisam de informação comprovada do proprietário antes de
+serem publicados — os campos correspondentes em `content/site.ts` estão
+vazios de propósito:
+
+- **Dados institucionais**: razão social, CNPJ, endereço, e-mail e telefone
+  (`content/site.ts` → `company`).
+- **Equipe e responsabilidade técnica**: nomes, cargos e registros (CREA/ART)
+  (`content/site.ts` → `team`).
+- **Credenciais e parcerias**: certificações e parcerias com fabricantes,
+  apenas com documento comprobatório (`content/site.ts` → `credentials`).
+- **Projetos reais**: cases com escopo técnico, cliente e resultado
+  verificável (`content/site.ts` → `projects`); ver
+  [public/assets/portfolio/README.md](public/assets/portfolio/README.md)
+  para como organizar as fotos.
+- **Redes sociais**: perfis oficiais ativos (`content/site.ts` → `socialLinks`).
+
+### Como cadastrar um projeto novo
+
+1. Fotografe a instalação (real, sem banco de imagens/IA) e otimize com
+   `npm run images:optimize -- public/assets/portfolio/<slug-do-projeto>`.
+2. Adicione um objeto ao array `projects` em `content/site.ts` com o
+   `slug`, título, segmento, cidade/UF, desafio, solução, escopo técnico e,
+   quando houver, resultado comprovado e depoimento autorizado.
+3. Rode `npm run build` para confirmar que `/projetos/<slug>` foi gerada.
+
+### Como preencher credenciais/dados institucionais
+
+Edite diretamente os campos de `company`, `team` e `credentials` em
+`content/site.ts` — cada campo tem um comentário `TODO: preencher somente
+com informação comprovada` indicando o que é esperado. Assim que um campo é
+preenchido, o bloco correspondente (rodapé, página Sobre, faixa de
+credenciais da home) passa a renderizar automaticamente.
+
+### Como trocar fotografias
+
+Todas as imagens do site vêm de `public/assets/`. Para trocar uma foto,
+basta substituir o arquivo referenciado em `content/site.ts` (projetos) ou
+no componente correspondente, mantendo o mesmo nome de arquivo ou
+atualizando a referência. Use sempre `npm run images:optimize` para gerar a
+versão WebP antes de publicar.
+
+## Variáveis de ambiente
+
+Veja `.env.example` para a lista completa. Nenhuma é obrigatória para rodar
+o site — todas habilitam integrações opcionais (Supabase, e-mail, WhatsApp,
+agente Claude, analytics).
 
 ## Documentos relacionados
 
-- [docs/whatsapp-agent.md](docs/whatsapp-agent.md) — setup, arquitetura e custos do agente
-- [docs/n8n-setup.md](docs/n8n-setup.md) — workflows n8n (régua de follow-up)
-- [supabase/schema.sql](supabase/schema.sql) — tabelas leads/conversations/propostas
-- `01-SITEMAP.md` até `05-GUIDELINES-IMAGENS.md` — design e estratégia
+- [docs/whatsapp-agent.md](docs/whatsapp-agent.md) — setup do agente de WhatsApp (`/loja`)
+- [docs/n8n-setup.md](docs/n8n-setup.md) — automações n8n
+- [supabase/schema.sql](supabase/schema.sql) — tabelas do banco
+- [public/assets/portfolio/README.md](public/assets/portfolio/README.md) — cadastro de fotos de projetos
+- `RELATORIO-AUDITORIA-IRRIGASOLAR-BESS.md` — auditoria estratégica que orientou esta reestruturação
 
-Protótipo HTML/Vite anterior em `legacy/` (referência visual).
+Protótipo HTML/Vite anterior em `legacy/` (referência visual histórica).
