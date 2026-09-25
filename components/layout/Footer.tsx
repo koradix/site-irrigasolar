@@ -118,11 +118,9 @@ export function Footer() {
                   Termos de uso
                 </Link>
               </li>
-              <li>
-                <Link href="/loja" className="text-sand/50 hover:text-sand text-xs">
-                  Configurador de kit solar (loja)
-                </Link>
-              </li>
+              {/* Link da loja removido enquanto app/loja/page.tsx estiver com
+                  LOJA_HABILITADA = false — foco comercial atual é 100% em
+                  projeto/solução de engenharia. */}
             </ul>
           </div>
         </div>
