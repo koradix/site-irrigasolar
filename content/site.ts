@@ -62,6 +62,8 @@ export interface TeamMember {
   role: string;
   /** Ex.: "CREA-BA nº ..." — TODO: preencher somente com informação comprovada */
   registration?: string;
+  /** Bio curta — apenas fatos confirmados pela própria pessoa */
+  bio?: string;
   photo?: string;
 }
 
@@ -149,8 +151,15 @@ export const socialLinks: SocialLink[] = [
  */
 export const credentials: Credential[] = [];
 
-/** TODO: preencher somente com informação comprovada (nome, cargo e registro profissional real) */
-export const team: TeamMember[] = [];
+export const team: TeamMember[] = [
+  {
+    name: 'Marcus Bonassi',
+    role: 'Engenheiro eletricista · Responsável técnico da Irrigasolar',
+    bio: 'Mais de 10 anos de experiência em engenharia elétrica.',
+    // registration: TODO: preencher somente com informação comprovada (nº CREA)
+    photo: '/assets/team/marcus-bonassi.webp',
+  },
+];
 
 // ============================================================
 // Soluções
@@ -239,11 +248,11 @@ export const applications: Application[] = [
 // ============================================================
 
 /**
- * Nenhum projeto real está cadastrado ainda. A página /projetos e os blocos
- * de portfólio na home devem exibir o estado institucional enxuto (sem
- * inventar cases) enquanto este array estiver vazio.
+ * Acervo real selecionado em content/portfolio-real.ts. A rastreabilidade das
+ * fotos fica em assets-source/portfolio/manifest.json. Não presumir métricas
+ * de desempenho, off-grid ou BESS a partir de fotografias de módulos solares.
  */
-export const projects: Project[] = [];
+export { realProjects as projects } from './portfolio-real';
 
 // ============================================================
 // FAQ

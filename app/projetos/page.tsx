@@ -9,7 +9,7 @@ import { projects } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'Projetos',
-  description: 'Portfólio de projetos reais de BESS, energia solar e irrigação da Irrigasolar Engenharia.',
+  description: 'Conheça registros reais de energia solar e infraestrutura rural do portfólio da Irrigasolar Engenharia.',
   alternates: { canonical: '/projetos' },
 };
 
@@ -20,10 +20,10 @@ export default function ProjetosPage() {
 
       <Hero
         eyebrow="Projetos"
-        title="Portfólio real, sem estudo de caso genérico."
-        subtitle="Cada projeto listado aqui tem escopo técnico, cliente e resultado verificáveis — nada de números ou depoimentos de exemplo."
-        imageSrc="/assets/visuals/hero-energia-agro.webp"
-        imageAlt="Visual conceitual de infraestrutura de energia integrada a uma operação agrícola"
+        title="Engenharia que ganha forma no campo."
+        subtitle="Conheça as instalações, os detalhes de implantação e as propriedades que fazem parte da trajetória da Irrigasolar."
+        imageSrc="/assets/portfolio/alfredo-seixas/01.webp"
+        imageAlt="Vista aérea dos módulos solares do projeto Alfredo Seixas"
       />
 
       <Section tone="paper">

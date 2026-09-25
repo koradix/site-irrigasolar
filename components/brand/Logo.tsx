@@ -24,7 +24,7 @@ export function Logo({ className, inverted = false, priority = false }: LogoProp
           width={216}
           height={90}
           priority={priority}
-          className="h-14 w-auto md:h-16"
+          className="h-16 w-auto md:h-20"
         />
       ) : (
         <Image
@@ -33,7 +33,7 @@ export function Logo({ className, inverted = false, priority = false }: LogoProp
           width={204}
           height={78}
           priority={priority}
-          className="h-14 w-auto md:h-16"
+          className="h-16 w-auto md:h-20"
         />
       )}
     </Link>

@@ -12,7 +12,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-sand">
           <Image
             src={project.cover}
-            alt={`Projeto Irrigasolar em ${project.city}/${project.state} — ${project.segment}`}
+            alt={`${project.title} — ${project.segment}`}
             fill
             sizes="(min-width: 1024px) 33vw, 100vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -24,9 +24,9 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="p-6">
         <p className="text-xs font-semibold uppercase tracking-wide text-copper-text">{project.segment}</p>
         <h3 className="mt-2 font-display text-xl font-semibold text-forest">{project.title}</h3>
-        <p className="mt-1 text-sm text-graphite/60">
-          {project.city}/{project.state}
-        </p>
+        {project.city && <p className="mt-1 text-sm text-graphite/60">
+          {[project.city, project.state].filter(Boolean).join('/')}
+        </p>}
         <p className="mt-3 text-sm leading-relaxed text-graphite/75 line-clamp-3">{project.challenge}</p>
       </div>
     </Link>

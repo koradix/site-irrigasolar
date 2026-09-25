@@ -43,24 +43,24 @@ export default function ProjetoPage({ params }: Props) {
       />
 
       <Hero
-        eyebrow={`${project.segment} · ${project.city}/${project.state}`}
+        eyebrow={[project.segment, [project.city, project.state].filter(Boolean).join('/')].filter(Boolean).join(' · ')}
         title={project.title}
         subtitle={project.challenge}
         imageSrc={project.cover}
-        imageAlt={project.cover ? `Projeto Irrigasolar em ${project.city}/${project.state}` : undefined}
+        imageAlt={project.cover ? project.title : undefined}
       />
 
       <Section tone="paper">
         <div className="mx-auto max-w-content px-5 md:px-8 lg:px-12">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <Eyebrow>Solução</Eyebrow>
+              <Eyebrow>O projeto</Eyebrow>
               <SerifHeading as="h2" size="md" className="mt-3">
-                O que foi projetado
+                Energia no contexto da propriedade
               </SerifHeading>
               <p className="mt-4 text-[15px] leading-relaxed text-graphite/80">{project.solution}</p>
 
-              <Eyebrow className="mt-8 block">Escopo técnico</Eyebrow>
+              <Eyebrow className="mt-8 block">Detalhes da instalação</Eyebrow>
               <ul className="mt-4 space-y-2">
                 {project.scope.map((item) => (
                   <li key={item} className="text-[15px] text-graphite/80">
@@ -88,11 +88,14 @@ export default function ProjetoPage({ params }: Props) {
             </div>
 
             {project.gallery && project.gallery.length > 0 && (
-              <div className="grid grid-cols-2 gap-4">
-                {project.gallery.map((src) => (
-                  <div key={src} className="relative aspect-square overflow-hidden rounded-sm bg-sand">
-                    <Image src={src} alt={`Galeria — ${project.title}`} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
-                  </div>
+              <div className="grid content-start gap-6 sm:grid-cols-2">
+                {project.gallery.map((src, index) => (
+                  <figure key={src} className={index === 0 ? 'sm:col-span-2' : ''}>
+                    <a href={src} target="_blank" rel="noreferrer" className="relative block aspect-[4/3] overflow-hidden rounded-sm bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-forest" aria-label={`Ampliar fotografia ${index + 1} de ${project.title}`}>
+                      <Image src={src} alt={`${project.title} — registro de campo ${index + 1}`} fill sizes={index === 0 ? '(min-width: 1024px) 45vw, 90vw' : '(min-width: 640px) 25vw, 90vw'} className="object-contain" />
+                    </a>
+                    <figcaption className="mt-2 text-xs leading-relaxed text-graphite/65">Registro de campo · Acervo Irrigasolar</figcaption>
+                  </figure>
                 ))}
               </div>
             )}

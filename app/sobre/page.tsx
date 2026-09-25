@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Hero } from '@/components/marketing/Hero';
 import { Section } from '@/components/ui/Section';
 import { Eyebrow } from '@/components/brand/Eyebrow';
@@ -56,12 +57,31 @@ export default function SobrePage() {
           {team.length > 0 ? (
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((member) => (
-                <div key={member.name} className="rounded-sm border border-rule bg-paper p-6">
-                  <h3 className="font-display text-lg font-semibold text-forest">{member.name}</h3>
-                  <p className="mt-1 text-sm text-graphite/70">{member.role}</p>
-                  {member.registration && (
-                    <p className="mt-2 text-xs uppercase tracking-wide text-copper">{member.registration}</p>
+                <div
+                  key={member.name}
+                  className="overflow-hidden rounded-sm border border-rule bg-paper"
+                >
+                  {member.photo && (
+                    <div className="relative aspect-[4/5] w-full bg-sand">
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
                   )}
+                  <div className="p-6">
+                    <h3 className="font-display text-lg font-semibold text-forest">{member.name}</h3>
+                    <p className="mt-1 text-sm text-copper-text">{member.role}</p>
+                    {member.bio && (
+                      <p className="mt-3 text-sm leading-relaxed text-graphite/75">{member.bio}</p>
+                    )}
+                    {member.registration && (
+                      <p className="mt-3 text-xs uppercase tracking-wide text-graphite/50">{member.registration}</p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

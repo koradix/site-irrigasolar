@@ -29,3 +29,11 @@ build
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Material interno de curadoria de portfólio — repositório é público no
+# GitHub. portfolio-review contém pranchas de contato com dados comerciais
+# de clientes (planilhas de orçamento, preços). portfolio-pendentes contém
+# fotos de clientes ainda sem identidade/escopo confirmados para publicação.
+# Nunca versionar nenhum dos dois — mantenha só localmente.
+assets-source/portfolio-review/
+assets-source/portfolio-pendentes/

@@ -14,7 +14,7 @@ export function PortfolioSection() {
         <div className="max-w-2xl">
           <Eyebrow>Projetos</Eyebrow>
           <SerifHeading as="h2" size="lg" className="mt-4">
-            Portfólio real, com escopo técnico verificável.
+            Projetos que fazem parte da nossa trajetória.
           </SerifHeading>
         </div>
 

@@ -15,22 +15,22 @@ export function ArchitectureSection() {
           </SerifHeading>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10">
-          <div className="rounded-sm border border-rule bg-paper p-6 md:p-10">
+        <div className="mt-12 overflow-hidden rounded-sm border border-rule bg-gradient-to-br from-sand via-paper to-sand/60">
+          <div className="p-6 md:p-10 md:pb-4">
             <ArchitectureDiagram />
           </div>
 
-          <div className="flex items-center gap-4 lg:w-52 lg:flex-col lg:gap-3 lg:text-center">
-            <div className="relative h-24 w-24 shrink-0 lg:h-32 lg:w-32">
+          <div className="flex items-end gap-4 px-6 pb-6 md:gap-6 md:px-10 md:pb-8">
+            <div className="relative -mb-2 h-32 w-32 shrink-0 md:h-44 md:w-44">
               <Image
                 src="/mascote.webp"
                 alt="Mascote Irrigasolar"
                 fill
-                sizes="(min-width: 1024px) 128px, 96px"
-                className="object-contain"
+                sizes="(min-width: 768px) 176px, 128px"
+                className="object-contain object-bottom"
               />
             </div>
-            <p className="rounded-sm border border-rule bg-paper px-4 py-3 text-sm leading-relaxed text-graphite/75">
+            <p className="relative mb-3 max-w-sm rounded-sm border border-rule/70 bg-paper/90 px-4 py-3 text-sm leading-relaxed text-graphite/80 before:absolute before:-left-2 before:bottom-3 before:h-3 before:w-3 before:rotate-45 before:border-b before:border-l before:border-rule/70 before:bg-paper/90">
               Não precisa decorar as siglas — a engenharia explica cada parte no diagnóstico.
             </p>
           </div>
