@@ -53,7 +53,7 @@ export function Header() {
             onClick={() => trackEvent('cta_diagnostico_click', { origem: 'header' })}
             className="inline-flex items-center justify-center rounded-sm bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-light transition-colors min-h-[44px]"
           >
-            Solicitar diagnóstico
+            Solicitar estudo
           </Link>
         </div>
 
@@ -106,7 +106,7 @@ export function Header() {
             onClick={() => trackEvent('cta_diagnostico_click', { origem: 'header_mobile' })}
             className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-sm bg-forest px-5 py-3 text-[15px] font-semibold text-paper"
           >
-            Solicitar diagnóstico
+            Solicitar estudo
           </Link>
         </nav>
       </div>

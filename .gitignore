@@ -5,6 +5,7 @@ node_modules
 
 # next
 .next
+.next-backup-design-20260926/
 out
 
 # production
@@ -37,3 +38,5 @@ next-env.d.ts
 # Nunca versionar nenhum dos dois — mantenha só localmente.
 assets-source/portfolio-review/
 assets-source/portfolio-pendentes/
+
+.vercel

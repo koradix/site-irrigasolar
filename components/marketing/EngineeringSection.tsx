@@ -26,11 +26,11 @@ export function EngineeringSection() {
           </div>
           <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-forest/10">
             <Image
-              src="/assets/visuals/engenharia-campo.webp"
-              alt="Visual conceitual de engenheiros avaliando uma instalação de energia solar no campo"
+              src="/assets/portfolio/gustavo-marshesan/equipe-limpa.webp"
+              alt="Profissional com colete da Irrigasolar junto aos módulos solares em campo"
               fill
               sizes="(min-width: 1024px) 55vw, 100vw"
-              className="object-cover"
+              className="object-cover object-[65%_center]"
             />
           </div>
         </div>

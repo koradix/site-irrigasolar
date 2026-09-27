@@ -10,30 +10,34 @@ interface LogoProps {
 }
 
 /**
- * Marca oficial da Irrigasolar (public/assets/img/logo-irrigasolar*.svg).
- * A versão colorida é usada sobre fundos claros (paper/sand); a versão
- * branca, sobre fundos escuros (forest — rodapé).
+ * Marca oficial da Irrigasolar, recomposta em layout horizontal de uma
+ * linha (public/assets/img/logo-irrigasolar-horizontal*.svg) — mesmos
+ * elementos, cores e tipografia do arquivo original
+ * (logo-irrigasolar.svg), só sem a inclinação de -10° e sem a palavra
+ * "solar" sobrepor a borda do oval, que ficavam desalinhadas em qualquer
+ * tamanho de cabeçalho. A versão colorida é usada sobre fundos claros
+ * (paper/sand); a branca, sobre fundos escuros (forest — rodapé).
  */
 export function Logo({ className, inverted = false, priority = false }: LogoProps) {
   return (
     <Link href="/" className={cn('inline-flex items-center', className)}>
       {inverted ? (
         <Image
-          src="/assets/img/logo-irrigasolar-white.svg"
+          src="/assets/img/logo-irrigasolar-horizontal-white.svg"
           alt="Irrigasolar"
-          width={216}
-          height={90}
+          width={320}
+          height={80}
           priority={priority}
-          className="h-16 w-auto md:h-20"
+          className="h-10 w-auto md:h-12"
         />
       ) : (
         <Image
-          src="/assets/img/logo-irrigasolar.svg"
+          src="/assets/img/logo-irrigasolar-horizontal.svg"
           alt="Irrigasolar"
-          width={204}
-          height={78}
+          width={320}
+          height={80}
           priority={priority}
-          className="h-16 w-auto md:h-20"
+          className="h-10 w-auto md:h-12"
         />
       )}
     </Link>

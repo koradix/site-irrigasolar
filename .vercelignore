@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.next-backup*/
+.git/
+.vercel/
+.env*
+!.env.example
+assets-source/
+referencias/
+*.md
+*.log
+*.tsbuildinfo

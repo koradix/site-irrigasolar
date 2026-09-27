@@ -6,10 +6,9 @@ import sharp from 'sharp';
 const inventory=JSON.parse(await fs.readFile('assets-source/portfolio-review/inventory.json','utf8'));
 const entries=inventory.flatMap(p=>p.entries.map(e=>({...e,project:p.name})));
 const selections={
+ 'gustavo-marshesan':[154,159,158,168,166],
  'alfredo-seixas':[86,82,75,57],
- 'aline-ac-almeida':[110,112,109,99],
- 'abel-reboucas':[3,8,2],
- 'fazenda-alagoa-de-cabaca':[224],
+ 'abilio-nascimento':[31,33,27,19],
 };
 const manifest=[];
 for(const [slug,ids] of Object.entries(selections)) {
@@ -30,7 +29,7 @@ for(const [slug,ids] of Object.entries(selections)) {
 await fs.writeFile('assets-source/portfolio/manifest.json',JSON.stringify(manifest,null,2));
 console.log(`${manifest.length} imagens preparadas; ${Math.round(manifest.reduce((s,e)=>s+e.bytes,0)/1024)} KB no total.`);
 
-const pending={ 'gustavo-identificacao-pendente':[132,137,136,143,152], 'abilio-nascimento':[31,33,27,19], 'matteus-guimaraes':[177], 'vegrisa-levantamento':[185,203] };
+const pending={ 'abel-reboucas':[3,8,2], 'aline-ac-almeida':[110,112,109,99], 'fazenda-alagoa-de-cabaca':[224], 'matteus-guimaraes':[177], 'vegrisa-levantamento':[185,203] };
 const pendingManifest=[];
 for(const [slug,ids] of Object.entries(pending)) {
  const dir=path.join('assets-source/portfolio-pendentes',slug);

@@ -18,7 +18,7 @@ export function SolutionsSection() {
           </SerifHeading>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {solutions.map((s) => {
             const Icon = ICONS[s.icon];
             return (
@@ -31,32 +31,38 @@ export function SolutionsSection() {
                     : 'group flex flex-col rounded-sm border border-rule bg-paper p-8 transition-colors hover:border-forest'
                 }
               >
-                <Icon className={s.featured ? 'h-9 w-9 text-copper' : 'h-9 w-9 text-copper'} />
-                <h3
-                  className={
-                    'mt-5 font-display text-2xl font-semibold ' + (s.featured ? 'text-paper' : 'text-forest')
-                  }
-                >
-                  {s.name}
-                </h3>
-                <p className={'mt-2 text-[15px] leading-relaxed ' + (s.featured ? 'text-sand/85' : 'text-graphite/75')}>
-                  {s.tagline}
-                </p>
-                <dl className="mt-5 space-y-2 text-sm">
-                  <div>
-                    <dt className={'font-semibold ' + (s.featured ? 'text-copper-text-inverse' : 'text-copper-text')}>Para quem</dt>
-                    <dd className={s.featured ? 'text-sand/80' : 'text-graphite/70'}>{s.forWho}</dd>
+                <div className={s.featured ? 'lg:flex lg:items-center lg:gap-10' : ''}>
+                  <div className={s.featured ? 'lg:flex-1' : ''}>
+                    <Icon className="h-9 w-9 text-copper" />
+                    <h3
+                      className={
+                        'mt-5 font-display text-2xl font-semibold ' + (s.featured ? 'text-paper' : 'text-forest')
+                      }
+                    >
+                      {s.name}
+                    </h3>
+                    <p className={'mt-2 text-[15px] leading-relaxed ' + (s.featured ? 'text-sand/85' : 'text-graphite/75')}>
+                      {s.tagline}
+                    </p>
                   </div>
-                </dl>
-                <span
-                  className={
-                    'mt-6 inline-flex items-center gap-2 text-sm font-semibold ' +
-                    (s.featured ? 'text-paper' : 'text-forest')
-                  }
-                >
-                  {s.nextStep}
-                  <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
+                  <div className={s.featured ? 'mt-5 lg:mt-0 lg:w-64 lg:shrink-0' : 'mt-5'}>
+                    <dl className="space-y-2 text-sm">
+                      <div>
+                        <dt className={'font-semibold ' + (s.featured ? 'text-copper-text-inverse' : 'text-copper-text')}>Para quem</dt>
+                        <dd className={s.featured ? 'text-sand/80' : 'text-graphite/70'}>{s.forWho}</dd>
+                      </div>
+                    </dl>
+                    <span
+                      className={
+                        'mt-4 inline-flex items-center gap-2 text-sm font-semibold ' +
+                        (s.featured ? 'text-paper' : 'text-forest')
+                      }
+                    >
+                      {s.nextStep}
+                      <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </div>
               </Link>
             );
           })}

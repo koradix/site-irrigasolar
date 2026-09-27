@@ -114,6 +114,7 @@ export interface Project {
   testimonial?: ProjectTestimonial;
   cover?: string;
   gallery?: string[];
+  galleryCaptions?: string[];
 }
 
 export interface FaqItem {

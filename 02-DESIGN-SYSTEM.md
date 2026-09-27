@@ -1,5 +1,7 @@
 # IRRIGASOLAR — Design System v2.0
 
+> Documento histórico. Para novas alterações, prevalecem `referencias/direcao-visual.md`, `app/globals.css`, `tailwind.config.ts` e `app/layout.tsx`: Source Serif 4 + Manrope e paleta forest/sand/paper/copper. A tipografia e os tokens abaixo não correspondem à implementação institucional atual.
+
 > Paleta extraída do protótipo Stitch validado. Sistema de cores Material Design 3.
 
 ---

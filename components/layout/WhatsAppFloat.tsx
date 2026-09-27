@@ -2,9 +2,13 @@
 
 import { whatsappLinkWith } from '@/lib/contato';
 import { trackEvent } from '@/lib/analytics';
+import { usePathname } from 'next/navigation';
 
 export function WhatsAppFloat() {
+  const pathname = usePathname();
   const href = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e gostaria de falar com a engenharia.');
+
+  if (pathname === '/diagnostico') return null;
 
   return (
     <a

@@ -64,8 +64,8 @@ export function Hero({
               {primaryCta && (
                 <LinkButton
                   href={primaryCta.href}
-                  variant="primary"
-                  className="bg-copper text-forest hover:bg-copper/90 sm:w-auto w-full"
+                  variant="copper"
+                  className="sm:w-auto w-full"
                   onClick={() => trackEvent('cta_diagnostico_click', { origem: 'hero' })}
                 >
                   {primaryCta.label}
@@ -74,8 +74,8 @@ export function Hero({
               {secondaryCta && (
                 <LinkButton
                   href={secondaryCta.href}
-                  variant="secondary"
-                  className="border-paper/40 text-paper hover:bg-paper hover:text-forest sm:w-auto w-full"
+                  variant="inverse"
+                  className="sm:w-auto w-full"
                 >
                   {secondaryCta.label}
                 </LinkButton>

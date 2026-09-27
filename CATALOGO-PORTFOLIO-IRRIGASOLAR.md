@@ -1,5 +1,9 @@
 # Portfólio real — seleção do acervo Irrigasolar
 
+Revisão vigente em 25/09/2026: o proprietário confirmou Gustavo Marshesan. A vitrine agora prioriza Gustavo, Alfredo e Abílio; Abel foi preservado no acervo e retirado da seleção pública nesta revisão. Consulte `RELATORIO-DESIGN-IRRIGASOLAR-2026-09-25.md` e `referencias/projetos-confirmados.md`. As seleções descritas abaixo são históricas.
+
+Atualização: por solicitação do proprietário, o site exibe somente Alfredo Seixas, Abílio Nascimento e Abel Rebouças, nessa ordem. Aline e Fazenda Alagoa de Cabaca foram retirados da listagem; seus arquivos foram preservados. As fichas abaixo registram a curadoria inicial. Abílio utiliza as quatro fotografias selecionadas, com descrição do contexto observado, sem atribuir execução de toda a infraestrutura ou resultados não documentados.
+
 Acervo consultado: `C:/Users/mmbon/OneDrive/IrrigaSolar`.
 
 ## Entrega

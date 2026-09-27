@@ -26,7 +26,7 @@ export default function HomePage() {
         eyebrow="Irrigasolar Engenharia"
         title="Energia confiável para o agro não parar."
         subtitle="Projetos de armazenamento em baterias, energia solar e irrigação off-grid para proteger operações críticas, reduzir custos e ampliar a autonomia no campo."
-        primaryCta={{ label: 'Solicitar diagnóstico energético', href: '/diagnostico' }}
+        primaryCta={{ label: 'Solicitar estudo para minha operação', href: '/diagnostico' }}
         secondaryCta={{ label: 'Conhecer as soluções', href: '/#solucoes' }}
         microcopy="Análise inicial por especialista. Cada projeto é dimensionado para a realidade da operação."
         imageSrc="/assets/visuals/hero-energia-agro.webp"
@@ -35,11 +35,11 @@ export default function HomePage() {
       <TrustBar />
       <ProblemSection />
       <SolutionsSection />
+      <PortfolioSection />
+      <EngineeringSection />
       <ArchitectureSection />
       <ApplicationsSection />
       <ProcessSection />
-      <PortfolioSection />
-      <EngineeringSection />
       <FaqSection items={faqForPage('home')} />
       <FinalCta />
     </>

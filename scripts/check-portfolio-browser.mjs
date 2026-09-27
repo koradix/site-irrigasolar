@@ -15,13 +15,17 @@ try {
  ws.addEventListener('message',event=>{const m=JSON.parse(event.data);if(pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(m.error):p.resolve(m.result);}});
  const send=(method,params={})=>new Promise((resolve,reject)=>{const i=++id;pending.set(i,{resolve,reject});ws.send(JSON.stringify({id:i,method,params}));});
  await send('Page.enable');
- for(const [name,url,width,height] of [['mobile','/projetos/alfredo-seixas',390,844],['desktop','/projetos',1440,1000]]) {
+ for(const [name,url,width,height] of [['home-mobile','/',390,844],['home-desktop','/',1440,1000],['diagnostico-mobile','/diagnostico',390,844],['mobile','/projetos/gustavo-marshesan',390,844],['desktop','/projetos',1440,1000],['sobre-mobile','/sobre',390,844],['sobre-desktop','/sobre',1440,1000],['engenharia-mobile','/engenharia',390,844]]) {
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<600});
   await send('Page.navigate',{url:'http://localhost:3105'+url});
   await new Promise(r=>setTimeout(r,1800));
   await send('Runtime.evaluate',{expression:'Promise.all([document.fonts.ready,...Array.from(document.images).map(i=>{i.loading="eager";return i.decode().catch(()=>{})})])',awaitPromise:true});
+  await send('Runtime.evaluate',{expression:'window.scrollTo(0,0)'});
+  await new Promise(r=>setTimeout(r,200));
   const metrics=await send('Runtime.evaluate',{expression:'JSON.stringify({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,images:Array.from(document.images).map(i=>({src:i.getAttribute("src"),loaded:i.complete&&i.naturalWidth>0}))})',returnByValue:true});
-  console.log(name,metrics.result.value);
+  const audit=JSON.parse(metrics.result.value);
+  console.log(name,JSON.stringify(audit));
+  if(audit.scrollWidth>audit.width || audit.images.some(i=>!i.loaded)) throw new Error(`Falha visual: ${name}`);
   const layout=await send('Page.getLayoutMetrics');
   const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.min(layout.cssContentSize.height,3000),scale:1}});
   await fs.writeFile(`assets-source/portfolio-review/site-${name}.png`,Buffer.from(shot.data,'base64'));

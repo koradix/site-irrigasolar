@@ -22,8 +22,8 @@ export default function ProjetosPage() {
         eyebrow="Projetos"
         title="Engenharia que ganha forma no campo."
         subtitle="Conheça as instalações, os detalhes de implantação e as propriedades que fazem parte da trajetória da Irrigasolar."
-        imageSrc="/assets/portfolio/alfredo-seixas/01.webp"
-        imageAlt="Vista aérea dos módulos solares do projeto Alfredo Seixas"
+        imageSrc="/assets/portfolio/gustavo-marshesan/01.webp"
+        imageAlt="Vista aérea do conjunto solar no acervo do projeto Gustavo Marshesan"
       />
 
       <Section tone="paper">

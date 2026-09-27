@@ -25,8 +25,8 @@ export default function SobrePage() {
         eyebrow="Sobre"
         title="Engenharia de energia aplicada à realidade do campo."
         subtitle="A Irrigasolar trabalha na interseção entre energia e produção agropecuária: entender a operação antes de especificar qualquer equipamento."
-        imageSrc="/assets/visuals/engenharia-campo.webp"
-        imageAlt="Visual conceitual de uma equipe de engenharia trabalhando em uma instalação de energia no campo"
+        imageSrc="/assets/portfolio/gustavo-marshesan/equipe-limpa.webp"
+        imageAlt="Profissional com a farda da Irrigasolar acompanhando uma instalação solar"
       />
 
       <Section tone="paper">
@@ -55,28 +55,29 @@ export default function SobrePage() {
           </div>
 
           {team.length > 0 ? (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid gap-8">
               {team.map((member) => (
                 <div
                   key={member.name}
-                  className="overflow-hidden rounded-sm border border-rule bg-paper"
+                  className="grid overflow-hidden rounded-sm border border-rule bg-paper md:grid-cols-[minmax(260px,0.8fr)_1.2fr]"
                 >
                   {member.photo && (
-                    <div className="relative aspect-[4/5] w-full bg-sand">
+                    <div className="relative aspect-square w-full bg-sand">
                       <Image
                         src={member.photo}
                         alt={member.name}
                         fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        className="object-cover"
+                        sizes="(min-width: 768px) 40vw, 100vw"
+                        className="object-cover object-top"
                       />
                     </div>
                   )}
-                  <div className="p-6">
-                    <h3 className="font-display text-lg font-semibold text-forest">{member.name}</h3>
+                  <div className="flex flex-col justify-center p-7 md:p-12">
+                    <Eyebrow>À frente da engenharia</Eyebrow>
+                    <h3 className="mt-4 font-display text-3xl font-semibold text-forest md:text-4xl">{member.name}</h3>
                     <p className="mt-1 text-sm text-copper-text">{member.role}</p>
                     {member.bio && (
-                      <p className="mt-3 text-sm leading-relaxed text-graphite/75">{member.bio}</p>
+                      <p className="mt-5 max-w-lg text-base leading-relaxed text-graphite/75">{member.bio}</p>
                     )}
                     {member.registration && (
                       <p className="mt-3 text-xs uppercase tracking-wide text-graphite/50">{member.registration}</p>
@@ -95,12 +96,12 @@ export default function SobrePage() {
         </div>
       </Section>
 
-      <Section tone="paper">
+      {credentials.length > 0 && <Section tone="paper">
         <div className="mx-auto max-w-content px-5 md:px-8 lg:px-12">
           <div className="max-w-2xl">
             <Eyebrow>Credenciais e parcerias</Eyebrow>
             <SerifHeading as="h2" size="lg" className="mt-4">
-              Só publicamos o que está documentado.
+              Credenciais da nossa atuação.
             </SerifHeading>
           </div>
 
@@ -121,7 +122,7 @@ export default function SobrePage() {
             </p>
           )}
         </div>
-      </Section>
+      </Section>}
 
       <FinalCta />
     </>

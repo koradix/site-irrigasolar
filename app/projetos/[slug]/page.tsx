@@ -92,9 +92,9 @@ export default function ProjetoPage({ params }: Props) {
                 {project.gallery.map((src, index) => (
                   <figure key={src} className={index === 0 ? 'sm:col-span-2' : ''}>
                     <a href={src} target="_blank" rel="noreferrer" className="relative block aspect-[4/3] overflow-hidden rounded-sm bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-forest" aria-label={`Ampliar fotografia ${index + 1} de ${project.title}`}>
-                      <Image src={src} alt={`${project.title} — registro de campo ${index + 1}`} fill sizes={index === 0 ? '(min-width: 1024px) 45vw, 90vw' : '(min-width: 640px) 25vw, 90vw'} className="object-contain" />
+                      <Image src={src} alt={project.galleryCaptions?.[index] ?? `${project.title} — registro de campo ${index + 1}`} fill sizes={index === 0 ? '(min-width: 1024px) 45vw, 90vw' : '(min-width: 640px) 25vw, 90vw'} className="object-contain" />
                     </a>
-                    <figcaption className="mt-2 text-xs leading-relaxed text-graphite/65">Registro de campo · Acervo Irrigasolar</figcaption>
+                    <figcaption className="mt-2 text-xs leading-relaxed text-graphite/65">{project.galleryCaptions?.[index] ?? 'Registro de campo.'} · Acervo Irrigasolar</figcaption>
                   </figure>
                 ))}
               </div>

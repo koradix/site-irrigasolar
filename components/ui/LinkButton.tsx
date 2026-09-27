@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { AnchorHTMLAttributes } from 'react';
 import { cn } from '@/lib/cn';
 
-export type LinkButtonVariant = 'primary' | 'secondary' | 'whatsapp';
+export type LinkButtonVariant = 'primary' | 'secondary' | 'whatsapp' | 'copper' | 'inverse';
 
 interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
@@ -11,6 +11,8 @@ interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const variantStyles: Record<LinkButtonVariant, string> = {
+  copper: 'bg-copper text-black hover:bg-solar',
+  inverse: 'bg-transparent text-paper border border-paper/40 hover:bg-paper hover:text-forest',
   primary: 'bg-forest text-paper hover:bg-forest-light',
   secondary: 'bg-transparent text-forest border border-forest hover:bg-forest hover:text-paper',
   whatsapp: 'bg-[#25D366] text-forest hover:brightness-95',
