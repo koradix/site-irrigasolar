@@ -4,11 +4,24 @@ import { Eyebrow } from '@/components/brand/Eyebrow';
 import { SerifHeading } from '@/components/brand/SerifHeading';
 import { OrcamentoForm } from '@/components/orcamento/OrcamentoForm';
 
+const TITLE = 'Pedir orçamento — Irrigasolar Engenharia';
+const DESCRIPTION =
+  'Conte sobre sua operação em poucos minutos e a engenharia monta sua proposta de bombeamento solar ou energia contínua.';
+
 export const metadata: Metadata = {
-  title: 'Pedir orçamento',
-  description:
-    'Envie os dados da sua operação e receba uma proposta de engenharia para bombeamento solar ou BESS — sem orçamento automático.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/orcamento' },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: '/orcamento',
+  },
+  twitter: {
+    card: 'summary',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 interface PageProps {
