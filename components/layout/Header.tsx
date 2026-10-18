@@ -10,13 +10,30 @@ import { cn } from '@/lib/cn';
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
+  // Home: cabeçalho flutua transparente sobre o hero (mais premium) e vira
+  // sólido assim que o visitante rola a página — demais rotas não têm hero
+  // de imagem cheia no topo, então mantêm o cabeçalho sólido sempre.
+  const isHome = pathname === '/';
+  const overHero = isHome && !scrolled;
+
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isHome) return;
+    function onScroll() {
+      setScrolled(window.scrollY > 64);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHome]);
 
   useEffect(() => {
     if (!open) return;
@@ -31,7 +48,14 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-rule">
+    <header
+      className={cn(
+        'z-50 transition-colors duration-300',
+        overHero
+          ? 'absolute inset-x-0 top-0 bg-gradient-to-b from-forest/55 via-forest/15 to-transparent'
+          : 'sticky top-0 bg-paper/95 backdrop-blur border-b border-rule',
+      )}
+    >
       <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-3 md:px-8 lg:px-12">
         <Logo priority />
 
@@ -40,7 +64,10 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[14px] font-medium text-graphite/80 hover:text-forest transition-colors"
+              className={cn(
+                'text-[14px] font-medium transition-colors',
+                overHero ? 'text-paper/90 hover:text-paper' : 'text-graphite/80 hover:text-forest',
+              )}
             >
               {item.label}
             </Link>
@@ -64,7 +91,10 @@ export function Header() {
           aria-controls="menu-mobile"
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           onClick={() => setOpen((v) => !v)}
-          className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-sm border border-rule text-forest"
+          className={cn(
+            'lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-sm border',
+            overHero ? 'border-paper/50 text-paper' : 'border-rule text-forest',
+          )}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
             {open ? (
@@ -89,7 +119,10 @@ export function Header() {
       <div
         id="menu-mobile"
         ref={menuRef}
-        className={cn('lg:hidden overflow-hidden transition-[max-height] duration-300', open ? 'max-h-[520px]' : 'max-h-0')}
+        className={cn(
+          'lg:hidden overflow-hidden transition-[max-height] duration-300 bg-paper',
+          open ? 'max-h-[520px]' : 'max-h-0',
+        )}
       >
         <nav aria-label="Navegação mobile" className="flex flex-col gap-1 px-5 pb-6 pt-2">
           {primaryNav.map((item) => (

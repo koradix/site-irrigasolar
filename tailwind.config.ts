@@ -40,11 +40,12 @@ const config: Config = {
         cream: 'var(--legacy-cream)',
       },
       fontFamily: {
-        display: ['var(--font-source-serif)', 'Georgia', 'serif'],
-        sans: ['var(--font-manrope)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-archivo)', 'Arial Narrow', 'sans-serif'],
+        sans: ['var(--font-plex-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-plex-mono)', '"Courier New"', 'monospace'],
         // Legado — usado só pelo fluxo /loja (configurador) e /obrigado.
-        headline: ['var(--font-manrope)', 'system-ui', 'sans-serif'],
-        body: ['var(--font-manrope)', 'system-ui', 'sans-serif'],
+        headline: ['var(--font-plex-sans)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-plex-sans)', 'system-ui', 'sans-serif'],
         label: ['"Courier New"', 'Courier', 'monospace'],
       },
       maxWidth: {

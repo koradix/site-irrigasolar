@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Source_Serif_4, Manrope } from 'next/font/google';
+import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
@@ -8,20 +8,30 @@ import { organizationSchema, websiteSchema } from '@/lib/schema';
 import { SITE_URL, SITE_NAME } from '@/content/site';
 import './globals.css';
 
-// Fontes: Source Serif 4 (títulos editoriais) + Manrope (interface, corpo,
-// navegação e números) — combinação recomendada no prompt de reestruturação.
-// Apenas os pesos usados são carregados, com display: swap.
-const sourceSerif = Source_Serif_4({
+// Fontes: Archivo (títulos, condensada/semi-condensada) + IBM Plex Sans
+// (interface, corpo, navegação) + IBM Plex Mono (números técnicos: CV, kVA,
+// kW, m) — opção A aprovada pelo proprietário em 18/10/2026 para a web,
+// substituindo Source Serif 4 + Manrope (mantidas como padrão canônico só
+// para documentos/propostas, fora do escopo deste site). Apenas os pesos
+// usados são carregados, com display: swap.
+const archivo = Archivo({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-source-serif',
+  weight: ['500', '700', '800'],
+  variable: '--font-archivo',
   display: 'swap',
 });
 
-const manrope = Manrope({
+const plexSans = IBM_Plex_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-manrope',
+  weight: ['400', '500', '600'],
+  variable: '--font-plex-sans',
+  display: 'swap',
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['500', '600'],
+  variable: '--font-plex-mono',
   display: 'swap',
 });
 
@@ -53,7 +63,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${sourceSerif.variable} ${manrope.variable}`}>
+    <html lang="pt-BR" className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable}`}>
       <body className="bg-paper text-graphite font-sans antialiased">
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />

@@ -17,7 +17,8 @@
 // ============================================================
 
 export interface Address {
-  street: string;
+  /** TODO: preencher somente com informação comprovada (logradouro e número) */
+  street?: string;
   district?: string;
   city: string;
   state: string;
@@ -134,9 +135,15 @@ export interface NavItem {
 
 export const company: CompanyInfo = {
   tradeName: 'Irrigasolar Engenharia',
-  // legalName, cnpj, address, email, phone e foundedYear seguem indefinidos
-  // até que a Irrigasolar forneça a documentação comprobatória.
-  regionsServed: ['Bahia'],
+  cnpj: '35.729.006/0001-89',
+  // Confirmado pelo proprietário em 18/10/2026. street/zip seguem indefinidos
+  // até documentação comprobatória do logradouro completo.
+  address: { city: 'Conceição do Jacuípe', state: 'BA' },
+  // legalName, email, phone e foundedYear seguem indefinidos até que a
+  // Irrigasolar forneça a documentação comprobatória.
+  // Sede na Bahia, atendimento em todo o Brasil (decisão do proprietário,
+  // 18/10/2026) — regionsServed descreve a área de atendimento, não a sede.
+  regionsServed: ['Todo o Brasil'],
   whatsappNumber: '5575999590288',
 };
 

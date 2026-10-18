@@ -1,0 +1,20 @@
+{
+  "faixas_cfw": [
+    { "uf": "BA", "cv_minimo": 15, "inclusivo": true },
+    { "uf": "OUTRAS", "cv_minimo": 50, "inclusivo": false }
+  ],
+  "criterio_cv": "soma_motores_instalacao",
+  "tensoes_cfw_aceitas": ["220T", "380T", "440T"],
+  "distancia_reator_m": 100,
+  "distancia_maxima_sem_visita_m": 300,
+  "horas_dia_alerta_cfw": 9,
+  "ufs_atendidas": "TODAS",
+  "bess_filtro_no_formulario": false,
+  "prazo_proposta_dias_uteis": null,
+  "cv_maximo_resposta_automatica": null,
+  "_pendente_confirmacao_proprietario": [
+    "distancia_maxima_sem_visita_m: valor conservador sugerido (300m) enquanto não há confirmação.",
+    "cv_maximo_resposta_automatica: sem teto definido ainda — null = qualquer CV dentro da faixa atendida pode cair em A/B, sem desvio automático para C por potência alta.",
+    "prazo_proposta_dias_uteis: null = a tela de resultado não exibe prazo específico até confirmação (evita inventar número)."
+  ]
+}

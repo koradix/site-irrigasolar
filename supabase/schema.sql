@@ -120,6 +120,57 @@ create policy "anon can insert diagnosticos"
   with check (true);
 
 -- =========================================================
+-- ORCAMENTOS — capturados pelo formulário /orcamento (triagem automática)
+-- =========================================================
+create table if not exists orcamentos (
+  id uuid primary key default uuid_generate_v4(),
+  pedido_numero text unique,
+  created_at timestamptz default now(),
+  -- Campos indexados para consulta rápida; o payload completo (estrutura
+  -- da seção 10 do prompt de redesign) fica em `payload`.
+  nome text not null,
+  whatsapp text not null,
+  email text,
+  municipio text,
+  uf text,
+  atividade text not null,
+  solucao_interesse text not null,
+  dor_principal text not null,
+  resultado_triagem text not null check (resultado_triagem in ('A', 'B', 'C', 'D')),
+  payload jsonb not null,
+  webhook_enviado_em timestamptz,
+  status text default 'novo'
+);
+
+create index if not exists orcamentos_created_at_idx on orcamentos(created_at desc);
+create index if not exists orcamentos_resultado_idx on orcamentos(resultado_triagem);
+create index if not exists orcamentos_status_idx on orcamentos(status);
+
+alter table orcamentos enable row level security;
+
+drop policy if exists "anon can insert orcamentos" on orcamentos;
+create policy "anon can insert orcamentos"
+  on orcamentos for insert
+  to anon
+  with check (true);
+
+-- =========================================================
+-- Storage — bucket privado para anexos do /orcamento (conta de luz,
+-- plaqueta de transformador/motor). Nunca público; acesso só via URL
+-- assinada com expiração, gerada no servidor (service_role).
+-- =========================================================
+insert into storage.buckets (id, name, public)
+values ('orcamentos-anexos', 'orcamentos-anexos', false)
+on conflict (id) do nothing;
+
+drop policy if exists "service role manages orcamentos-anexos" on storage.objects;
+create policy "service role manages orcamentos-anexos"
+  on storage.objects for all
+  to service_role
+  using (bucket_id = 'orcamentos-anexos')
+  with check (bucket_id = 'orcamentos-anexos');
+
+-- =========================================================
 -- Função utilitária: limpa conversas expiradas
 -- Rode via cron do Supabase (pg_cron) ou chame manualmente.
 -- =========================================================

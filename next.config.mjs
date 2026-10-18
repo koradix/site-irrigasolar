@@ -15,9 +15,17 @@
 // `dangerouslySetInnerHTML` em nenhum lugar exceto o componente `JsonLd`
 // (dados JSON escapados, tipo `application/ld+json`, não executável), e
 // todo o conteúdo dinâmico passa pelo escape automático do JSX.
+// Em desenvolvimento, o runtime de Fast Refresh do Next.js (webpack HMR)
+// usa `eval()` para mapear source maps — sem 'unsafe-eval' aqui a
+// hidratação do React falha silenciosamente em `next dev` (o app vira só
+// HTML estático sem JS funcionando, formulários caem no submit nativo do
+// navegador). Builds de produção (`next build`) não usam eval, então a
+// política de produção continua sem 'unsafe-eval'.
+const scriptSrc = ["'self'", "'unsafe-inline'", ...(process.env.NODE_ENV !== 'production' ? ["'unsafe-eval'"] : [])].join(' ');
+
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src ${scriptSrc}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",

@@ -15,7 +15,7 @@ export function Footer() {
       <div className="mx-auto max-w-content px-5 py-16 md:px-8 md:py-20 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-4 lg:gap-8">
           <div className="lg:col-span-1 space-y-4">
-            <Logo inverted />
+            <Logo />
             <p className="text-sand/70 text-sm leading-relaxed max-w-xs">
               Engenharia de energia para operações críticas do agronegócio: armazenamento em
               baterias, solar e irrigação off-grid.
@@ -58,8 +58,12 @@ export function Footer() {
                   {company.cnpj && <li className="text-sand/80">CNPJ {company.cnpj}</li>}
                   {hasAddress && company.address && (
                     <li className="text-sand/80">
-                      {company.address.street}
-                      {company.address.district ? `, ${company.address.district}` : ''} —{' '}
+                      {company.address.street && (
+                        <>
+                          {company.address.street}
+                          {company.address.district ? `, ${company.address.district}` : ''} —{' '}
+                        </>
+                      )}
                       {company.address.city}/{company.address.state}
                     </li>
                   )}

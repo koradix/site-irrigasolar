@@ -11,7 +11,18 @@ export type AnalyticsEvent =
   | 'diagnostico_step_complete'
   | 'diagnostico_submit'
   | 'project_view'
-  | 'solution_view';
+  | 'solution_view'
+  // /orcamento (seção 9 do prompt de redesign — medição por etapa do funil)
+  | 'orcamento_inicio'
+  | 'orcamento_etapa_1'
+  | 'orcamento_etapa_2'
+  | 'orcamento_etapa_3'
+  | 'orcamento_etapa_4'
+  | 'orcamento_envio'
+  | 'orcamento_resultado_a'
+  | 'orcamento_resultado_b'
+  | 'orcamento_resultado_c'
+  | 'orcamento_resultado_d';
 
 declare global {
   interface Window {

@@ -8,7 +8,9 @@ export function WhatsAppFloat() {
   const pathname = usePathname();
   const href = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e gostaria de falar com a engenharia.');
 
-  if (pathname === '/diagnostico') return null;
+  // WhatsApp não compete com o formulário nas páginas de venda (5.9 do
+  // prompt de redesign) — aparece só depois do envio, na tela de resultado.
+  if (pathname === '/diagnostico' || pathname === '/orcamento') return null;
 
   return (
     <a
