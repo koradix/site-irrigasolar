@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { LinkButton } from '@/components/ui/LinkButton';
 import { trackEvent } from '@/lib/analytics';
@@ -6,8 +8,8 @@ interface HeroProps {
   eyebrow?: string;
   title: string;
   subtitle: string;
-  primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  primaryCta?: { label: string; href: string; external?: boolean };
+  secondaryCta?: { label: string; href: string; external?: boolean };
   microcopy?: string;
   imageSrc?: string;
   imageAlt?: string;
@@ -65,6 +67,7 @@ export function Hero({
                 <LinkButton
                   href={primaryCta.href}
                   variant="copper"
+                  external={primaryCta.external}
                   className="sm:w-auto w-full"
                   onClick={() => trackEvent('cta_diagnostico_click', { origem: 'hero' })}
                 >

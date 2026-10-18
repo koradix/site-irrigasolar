@@ -8,6 +8,9 @@ import { EngineeringSection } from '@/components/marketing/EngineeringSection';
 import { FinalCta } from '@/components/marketing/FinalCta';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
+import { whatsappLinkWith } from '@/lib/contato';
+
+const CTA_WHATSAPP = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e quero falar sobre o método de engenharia de vocês.');
 
 export const metadata: Metadata = {
   title: 'Engenharia e Integração Energética para o Agro',
@@ -25,7 +28,7 @@ export default function EngenhariaPage() {
         eyebrow="Engenharia"
         title="Projeto sob medida, da captação de dados à operação em campo."
         subtitle="Cada projeto — BESS, off-grid ou irrigação — segue o mesmo método: entender a operação real antes de especificar qualquer equipamento."
-        primaryCta={{ label: 'Solicitar diagnóstico técnico', href: '/diagnostico' }}
+        primaryCta={{ label: 'Falar com a engenharia', href: CTA_WHATSAPP, external: true }}
         imageSrc="/assets/portfolio/gustavo-marshesan/equipe-limpa.webp"
         imageAlt="Acompanhamento em campo com a farda da Irrigasolar junto aos módulos solares"
       />

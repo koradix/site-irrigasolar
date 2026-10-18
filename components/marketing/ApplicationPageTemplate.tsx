@@ -5,6 +5,9 @@ import { SerifHeading } from '@/components/brand/SerifHeading';
 import { FinalCta } from '@/components/marketing/FinalCta';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
+import { whatsappLinkWith } from '@/lib/contato';
+
+const CTA_WHATSAPP = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e quero falar sobre minha operação.');
 
 export interface ApplicationPageContent {
   slug: string;
@@ -37,7 +40,7 @@ export function ApplicationPageTemplate({ content }: { content: ApplicationPageC
         eyebrow={content.eyebrow}
         title={content.title}
         subtitle={content.subtitle}
-        primaryCta={{ label: 'Solicitar diagnóstico energético', href: '/diagnostico' }}
+        primaryCta={{ label: 'Falar com a engenharia', href: CTA_WHATSAPP, external: true }}
         imageSrc={content.heroImage}
         imageAlt={content.heroImageAlt}
       />

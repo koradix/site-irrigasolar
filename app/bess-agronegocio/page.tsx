@@ -12,6 +12,9 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema, serviceSchema } from '@/lib/schema';
 import { faqForPage } from '@/content/site';
 import { GaugeIcon, ShieldIcon, GridIcon } from '@/components/ui/icons';
+import { whatsappLinkWith } from '@/lib/contato';
+
+const CTA_WHATSAPP = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e quero falar sobre BESS para minha operação.');
 
 export const metadata: Metadata = {
   title: 'BESS para o Agronegócio | Armazenamento de Energia',
@@ -51,7 +54,7 @@ export default function BessPage() {
         eyebrow="BESS para o Agro"
         title="Armazenamento de energia para operações que não podem parar."
         subtitle="BESS (Battery Energy Storage System) integra baterias, solar, rede e gerador para proteger cargas críticas, reduzir exposição a falhas de energia e dar mais previsibilidade à operação."
-        primaryCta={{ label: 'Solicitar diagnóstico energético', href: '/diagnostico' }}
+        primaryCta={{ label: 'Falar com a engenharia', href: CTA_WHATSAPP, external: true }}
         secondaryCta={{ label: 'Ver aplicações no agro', href: '#aplicacoes' }}
         imageSrc="/assets/visuals/bess-silos-agro.webp"
         imageAlt="Visual conceitual de sistema BESS integrado a silos e geração solar no agronegócio"

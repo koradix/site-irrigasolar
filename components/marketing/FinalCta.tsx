@@ -22,11 +22,8 @@ export function FinalCta({
         </SerifHeading>
         <p className="mx-auto mt-4 max-w-xl text-sand/80">{subtitle}</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <LinkButton href="/diagnostico" variant="copper" className="w-full sm:w-auto">
-            Solicitar estudo para minha operação
-          </LinkButton>
-          <LinkButton href={wa} variant="inverse" external className="w-full sm:w-auto">
-            Falar com a equipe no WhatsApp
+          <LinkButton href={wa} variant="copper" external className="w-full sm:w-auto">
+            Falar com a engenharia no WhatsApp
           </LinkButton>
         </div>
       </div>

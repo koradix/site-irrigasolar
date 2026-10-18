@@ -6,6 +6,9 @@ import { LinkButton } from '@/components/ui/LinkButton';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema } from '@/lib/schema';
 import { projects } from '@/content/site';
+import { whatsappLinkWith } from '@/lib/contato';
+
+const CTA_WHATSAPP = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e gostaria de falar com a engenharia.');
 
 export const metadata: Metadata = {
   title: 'Projetos',
@@ -43,7 +46,7 @@ export default function ProjetosPage() {
                 diretamente com a engenharia sobre a sua operação.
               </p>
               <div className="mt-6">
-                <LinkButton href="/diagnostico">Falar com a engenharia</LinkButton>
+                <LinkButton href={CTA_WHATSAPP} external>Falar com a engenharia</LinkButton>
               </div>
             </div>
           )}

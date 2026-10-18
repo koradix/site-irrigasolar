@@ -11,6 +11,9 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbSchema, serviceSchema } from '@/lib/schema';
 import { faqForPage } from '@/content/site';
 import { DropletIcon, SunIcon, BatteryIcon, GaugeIcon } from '@/components/ui/icons';
+import { whatsappLinkWith } from '@/lib/contato';
+
+const CTA_WHATSAPP = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e quero falar sobre irrigação solar off-grid.');
 
 export const metadata: Metadata = {
   title: 'Irrigação Solar Off-grid e Bombeamento Solar',
@@ -78,7 +81,7 @@ export default function OffGridPage() {
         eyebrow="Irrigação Solar Off-grid"
         title="Bombeamento solar para captar água sem depender da rede."
         subtitle="Para propriedades sem rede confiável, o bombeamento solar aproveita a energia do sol para levar água a um reservatório — a própria reservação já funciona como estratégia de autonomia da operação."
-        primaryCta={{ label: 'Solicitar avaliação técnica', href: '/diagnostico' }}
+        primaryCta={{ label: 'Falar com a engenharia', href: CTA_WHATSAPP, external: true }}
         secondaryCta={{ label: 'Ver tipos de sistema', href: '#sistemas' }}
         imageSrc="/assets/visuals/irrigacao-solar-offgrid.webp"
         imageAlt="Visual conceitual de bombeamento solar off-grid com reservatório e pivô de irrigação"

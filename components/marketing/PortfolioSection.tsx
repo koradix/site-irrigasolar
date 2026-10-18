@@ -4,9 +4,11 @@ import { SerifHeading } from '@/components/brand/SerifHeading';
 import { LinkButton } from '@/components/ui/LinkButton';
 import { ProjectCard } from './ProjectCard';
 import { projects } from '@/content/site';
+import { whatsappLinkWith } from '@/lib/contato';
 
 export function PortfolioSection() {
   const featured = projects.slice(0, 3);
+  const wa = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e gostaria de falar com a engenharia.');
 
   return (
     <Section tone="paper">
@@ -39,7 +41,7 @@ export function PortfolioSection() {
               diretamente com a engenharia sobre o seu caso.
             </p>
             <div className="mt-6">
-              <LinkButton href="/diagnostico" variant="primary">
+              <LinkButton href={wa} variant="primary" external>
                 Falar com a engenharia
               </LinkButton>
             </div>

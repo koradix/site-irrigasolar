@@ -6,7 +6,10 @@ import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/brand/Logo';
 import { primaryNav } from '@/content/site';
 import { trackEvent } from '@/lib/analytics';
+import { whatsappLinkWith } from '@/lib/contato';
 import { cn } from '@/lib/cn';
+
+const CTA_WHATSAPP = whatsappLinkWith('Olá! Vim pelo site da Irrigasolar e quero solicitar um estudo para minha operação.');
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -75,13 +78,15 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <Link
-            href="/diagnostico"
+          <a
+            href={CTA_WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => trackEvent('cta_diagnostico_click', { origem: 'header' })}
             className="inline-flex items-center justify-center rounded-sm bg-forest px-5 py-2.5 text-[14px] font-semibold text-paper hover:bg-forest-light transition-colors min-h-[44px]"
           >
-            Solicitar estudo
-          </Link>
+            Falar com a engenharia
+          </a>
         </div>
 
         <button
@@ -134,13 +139,15 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/diagnostico"
+          <a
+            href={CTA_WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => trackEvent('cta_diagnostico_click', { origem: 'header_mobile' })}
             className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-sm bg-forest px-5 py-3 text-[15px] font-semibold text-paper"
           >
-            Solicitar estudo
-          </Link>
+            Falar com a engenharia
+          </a>
         </nav>
       </div>
     </header>
