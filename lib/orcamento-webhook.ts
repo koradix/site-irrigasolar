@@ -107,6 +107,7 @@ async function montarPayload({ pedidoId, payload, triagem, origemUtm }: WebhookP
       diesel_mensal_brl: payload.dieselMensalBrl || null,
       gerador_kva: payload.geradorKva || null,
       frequencia_quedas: payload.frequenciaQuedas || null,
+      historico_consumo_texto: payload.historicoConsumoTexto || null,
     },
     motores: (payload.motores ?? []).map((m) => ({
       cv: m.cv,

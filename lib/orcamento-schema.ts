@@ -177,6 +177,8 @@ export const step2Schema = z.object({
   dieselMensalBrl: z.string().max(20).optional(),
   geradorKva: z.string().max(20).optional(),
   frequenciaQuedas: optionalEnum(FREQUENCIA_QUEDAS),
+  /** Preenchido quando a conta enviada não mostra o histórico de consumo dos últimos 12 meses. */
+  historicoConsumoTexto: z.string().max(600).optional(),
 });
 export type Step2Values = z.infer<typeof step2Schema>;
 

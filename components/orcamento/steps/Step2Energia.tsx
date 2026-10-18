@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TextField } from '@/components/forms/TextField';
+import { TextareaField } from '@/components/forms/TextareaField';
 import { RadioGroupField } from '@/components/forms/RadioGroupField';
 import { StepNav } from '@/components/diagnostico/StepNav';
 import { FileUploadField } from '@/components/orcamento/FileUploadField';
@@ -49,6 +50,7 @@ export function Step2Energia({ data, update, pastaId, onNext, onBack }: Props) {
       dieselMensalBrl: data.dieselMensalBrl ?? '',
       geradorKva: data.geradorKva ?? '',
       frequenciaQuedas: data.frequenciaQuedas,
+      historicoConsumoTexto: data.historicoConsumoTexto ?? '',
     },
   });
 
@@ -76,15 +78,33 @@ export function Step2Energia({ data, update, pastaId, onNext, onBack }: Props) {
         register={register}
       />
 
+      <RadioGroupField
+        legend="Quantas unidades consumidoras (contas de luz) a propriedade tem, no mesmo titular?"
+        name="ucsMesmoTitular"
+        options={UCS_OPTIONS}
+        register={register}
+      />
+      <p className="-mt-4 text-xs text-graphite/60">
+        É comum ter mais de uma conta na mesma propriedade (ex.: uma para a casa, outra para o poço). Conte todas.
+      </p>
+
       {rede !== 'nao' && (
-        <FileUploadField
-          label="Foto ou PDF da conta de luz"
-          hint="Envie a conta inteira, frente e verso, com o histórico de consumo legível. Se tiver mais de uma unidade consumidora na propriedade, envie todas."
-          pastaId={pastaId}
-          value={contaLuzAnexos}
-          onChange={(anexos) => update({ contaLuzAnexos: anexos })}
-          max={6}
-        />
+        <>
+          <FileUploadField
+            label="Foto ou PDF da conta de luz"
+            hint="Envie a conta inteira, frente e verso, com o histórico de consumo legível. Se tiver mais de uma unidade consumidora, envie a conta de cada uma."
+            pastaId={pastaId}
+            value={contaLuzAnexos}
+            onChange={(anexos) => update({ contaLuzAnexos: anexos })}
+            max={6}
+          />
+          <TextareaField
+            label="Histórico de consumo dos últimos 12 meses"
+            hint="Preencha aqui só se a conta que você enviou não mostrar o histórico mensal — a engenharia precisa dos últimos 12 meses para dimensionar corretamente."
+            rows={3}
+            {...register('historicoConsumoTexto')}
+          />
+        </>
       )}
 
       {rede === 'nao' && (
@@ -136,12 +156,6 @@ export function Step2Energia({ data, update, pastaId, onNext, onBack }: Props) {
             onChange={(anexos) => update({ transformadorFotoAnexo: anexos[0] })}
             max={1}
             single
-          />
-          <RadioGroupField
-            legend="Quantas unidades consumidoras (contas) existem na propriedade, no mesmo titular?"
-            name="ucsMesmoTitular"
-            options={UCS_OPTIONS}
-            register={register}
           />
         </div>
       )}
