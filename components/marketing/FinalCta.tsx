@@ -22,7 +22,7 @@ export function FinalCta({
         </SerifHeading>
         <p className="mx-auto mt-4 max-w-xl text-sand/80">{subtitle}</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <LinkButton href={wa} variant="copper" external className="w-full sm:w-auto">
+          <LinkButton href={wa} variant="cta" external className="w-full sm:w-auto">
             Falar com a engenharia no WhatsApp
           </LinkButton>
         </div>

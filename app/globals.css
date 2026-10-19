@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.home-carousel-shade {
+  background: linear-gradient(90deg,rgba(13,32,23,.83) 0%,rgba(18,38,27,.65) 30%,rgba(18,38,27,.18) 63%,rgba(18,38,27,.03) 100%),linear-gradient(0deg,rgba(13,32,23,.65),transparent 26%);
+}
+.home-carousel .bg-paper\/95 { background-color: rgba(252,251,247,.95); }
+.home-carousel .bg-paper\/90 { background-color: rgba(252,251,247,.90); }
+header.bg-paper\/95 { background-color: rgba(252,251,247,.95); }
+@media (max-width:767px) {
+  .home-carousel-shade { background:linear-gradient(90deg,#10271dcf,#10271d55),linear-gradient(0deg,#10271d99,transparent 40%); }
+}
+
 :root {
   /* Paleta premium — engenharia aplicada ao agronegócio (ver PROMPT-REESTRUTURACAO-SITE-IRRIGASOLAR.md).
      Contraste checado para WCAG AA:
@@ -10,7 +20,9 @@
      - copper (#B97832) sobre paper: ~3.2:1 — usar apenas em texto grande
        (>=24px/bold), ícones, bordas e badges; nunca em texto corrido pequeno.
      - solar (#E4AD32) é reservado para realces pontuais (traço, ícone,
-       sublinhado) — nunca como cor de texto corrido. */
+       sublinhado) — nunca como cor de texto corrido.
+     - CTA (#E6C44A) é o amarelo aprovado para ações principais de conversão,
+       sempre com texto graphite. */
   --color-forest: #10271d;
   --color-forest-light: #244c3a;
   --color-sand: #f3efe6;
@@ -18,6 +30,8 @@
   --color-graphite: #18201c;
   --color-copper: #b97832;
   --color-solar: #e4ad32;
+  --color-cta: #e6c44a;
+  --color-cta-hover: #f1d66a;
   --color-rule: #ddd6c6;
 
   /* Variantes de texto do cobre: --color-copper (#B97832) só atinge ~3.2:1

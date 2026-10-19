@@ -21,6 +21,8 @@ const config: Config = {
         'copper-text': 'var(--color-copper-text)',
         'copper-text-inverse': 'var(--color-copper-text-inverse)',
         solar: 'var(--color-solar)',
+        cta: 'var(--color-cta)',
+        'cta-hover': 'var(--color-cta-hover)',
         rule: 'var(--color-rule)',
         // Alias retido para o fluxo /loja (configurador legado) — evita
         // reescrever aquele fluxo secundário só por causa da paleta.

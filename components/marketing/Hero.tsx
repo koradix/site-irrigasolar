@@ -66,7 +66,7 @@ export function Hero({
               {primaryCta && (
                 <LinkButton
                   href={primaryCta.href}
-                  variant="copper"
+                  variant="cta"
                   external={primaryCta.external}
                   className="sm:w-auto w-full"
                   onClick={() => trackEvent('cta_diagnostico_click', { origem: 'hero' })}
